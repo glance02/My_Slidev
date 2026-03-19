@@ -94,7 +94,7 @@ layout: default
 
 <div class="grid grid-cols-2 gap-6 mt-4">
 
-<div class="border rounded-lg p-4 bg-blue-50">
+<div >
 
 ### 🔁 LSTM
 
@@ -108,7 +108,8 @@ layout: default
 
 </div>
 
-<div class="border rounded-lg p-4 bg-green-50">
+
+<div>
 
 ### ⚡ Transformer
 

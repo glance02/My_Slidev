@@ -153,7 +153,8 @@ class EnergyTransformer(nn.Module):
         super().__init__()
         self.input_proj = nn.Linear(input_size, d_model)
         encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model, nhead=nhead, dim_feedforward=256,
+            d_model=d_model, nhead=nhead, 
+            dim_feedforward=256,
             dropout=0.1, batch_first=True
         )
         self.encoder = nn.TransformerEncoder(
