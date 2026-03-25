@@ -74,20 +74,7 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 <div class="flex flex-col justify-center text-sm">
 
-```
-         ┌──────────────────────────────┐
-         │         细胞状态 C_t          │
-         │  ×(遗忘) ──────────── +(写入) │
-         └──────┬──────────────────┬────┘
-                │                  │
-         遗忘门 f_t             输入门 i_t
-                │                  │
-         ┌──────┴──────────────────┴────┐
-x_t ───→ │   [h_{t-1}, x_t] 拼接输入    │ ───→ h_t
-h_{t-1}─→│                              │
-         └──────────────────────────────┘
-                      ↑ 输出门 o_t
-```
+<img src="/img/lstm_shape.png" class="h-54 mx-auto">
 
 <div class="mt-3 text-gray-500">
 🔑 关键洞察：细胞状态像"高速公路"，梯度可以直接流过，有效缓解梯度消失
@@ -96,103 +83,27 @@ h_{t-1}─→│                              │
 </div>
 </div>
 
-<!-- 重点讲三个门的直觉，不要陷入公式细节 -->
-
----
-layout: default
----
-
-# LSTM 应用案例：短期电力负荷预测
-
-<div class="mt-2">
-
-**任务描述**：给定过去 24 小时的用电量（含天气、节假日信息），预测未来 1~24 小时的负荷。
-
-</div>
-
-<div class="grid grid-cols-2 gap-6 mt-3">
-
-<div>
-
-### 数据特征
-
-典型输入特征向量 $\mathbf{x}_t$：
-
-| 特征 | 说明 |
-|------|------|
-| 历史负荷 | 过去 T 步用电量 |
-| 温度 | 对空调用电影响显著 |
-| 小时/星期 | 周期性规律 |
-| 节假日标志 | 用电行为异常 |
-
-<div class="mt-3 text-sm text-gray-400 border-l-4 border-cyan-400/70 pl-3">
-参考：Wang et al., 2023, <em>Frontiers in Energy Research</em> —— 多层空洞 LSTM + 注意力，MAPE 降至 <strong>1.8%</strong>
-</div>
-
-</div>
-
-<div>
-
-### 模型结构
-
-````md magic-move
-```python
-import torch
-import torch.nn as nn
-
-class EnergyLSTM(nn.Module):
-    def __init__(self, input_size=8,
-                 hidden_size=128,
-                 num_layers=2,
-                 output_size=24):
-        super().__init__()
-        self.lstm = nn.LSTM(
-            input_size=input_size,
-            hidden_size=hidden_size,
-            num_layers=num_layers,
-            batch_first=True,
-            dropout=0.2
-        )
-        self.fc = nn.Linear(hidden_size,output_size)
-```
-
-```python
-class EnergyLSTM(nn.Module):
-    def __init__(self, input_size=8,hidden_size=128,
-                 num_layers=2,output_size=24):
-        super().__init__()
-        self.lstm = nn.LSTM(
-            input_size=input_size,
-            hidden_size=hidden_size,
-            num_layers=num_layers,
-            batch_first=True,
-            dropout=0.2
-        )
-        self.fc = nn.Linear(hidden_size,output_size)
-    def forward(self, x):
-        # x: (batch, seq_len, features)
-        out, _ = self.lstm(x)
-        # 取最后一步输出
-        return self.fc(out[:, -1, :])
-```
-````
-</div>
-</div>
-
 <!--
-代码尽量简洁，帮助听众理解结构，不需要逐行讲
+重点讲三个门的直觉，不要陷入公式细节
 -->
 
 ---
+src: /pages/lstm实例.md
+---
+
+
+---
 layout: default
 ---
 
-# 短期电力负荷预测项目
+## LoadPredictor具体部署
 
-在github上可以找到许多基于LSTM的电力负荷预测项目，以下是一个典型的项目结构：
-
-![](/img/lstm_dark.png)
-
+<iframe 
+  src="https://lstm-show.streamlit.app/?embed=true" 
+  width="100%" 
+  height="450" 
+  frameborder="0">
+</iframe>
 
 ---
 layout: default
