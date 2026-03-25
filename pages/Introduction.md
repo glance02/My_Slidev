@@ -1,7 +1,7 @@
 ---
 layout: section
 ---
-qq
+
 # Part 1
 ## 为什么需要智慧能源？
 
