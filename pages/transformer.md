@@ -8,14 +8,11 @@ layout: section
 <!-- Transformer：用"注意力"替代"记忆"，一次看全整段序列 -->
 
 ---
-layout: default
+layout: two-cols
+class: my-auto
 ---
 
 # Transformer 的核心：自注意力机制
-
-<div class="grid grid-cols-2 gap-6 mt-2">
-
-<div>
 
 Transformer 来自 2017 年 Google 的论文  
 **"Attention is All You Need"**（Vaswani et al.）
@@ -30,36 +27,10 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\r
 - $K$（Key）：其他位置"提供什么"
 - $V$（Value）：实际携带的信息
 
-多头注意力 = 多个独立注意力头并行，捕捉不同维度的关联。
+::right::
 
-</div>
+<img src="./../img/Transformer.png" class="h-95 mx-20" />
 
-<div class="text-sm flex flex-col justify-center">
-
-```
-自注意力示例（能源序列）：
-
-时刻   t=0  t=1  t=2 ... t=23
-负荷   320  340  580 ...  290
-
-t=2（异常高峰）对其他时刻的注意力权重：
-        ↑高   ↑低   ●   ↑中
-t=0   t=1   t=2   t=3  ...
-
-→ 模型自动学到：高峰时刻
-  与前一天同时段关联最强！
-```
-
-<div class="mt-4 border-l-4 border-green-400 pl-3">
-
-⚡ 与 LSTM 的根本区别：  
-LSTM 是"沿时间传递"，  
-Transformer 是"跨时间直连"
-
-</div>
-
-</div>
-</div>
 
 ---
 layout: default
@@ -73,23 +44,7 @@ layout: default
 
 ### 标准 Encoder-Decoder 架构
 
-```
-输入序列（历史负荷+天气）
-       ↓
-  位置编码（Positional Encoding）
-       ↓
- ┌─────────────────┐
- │   Encoder        │  ← 多头自注意力
- │   (N 层堆叠)     │     + 前馈网络
- └────────┬────────┘
-          │ 上下文向量
- ┌────────↓────────┐
- │   Decoder        │  ← 交叉注意力
- │   (N 层堆叠)     │     关注编码信息
- └────────┬────────┘
-          ↓
-     预测输出（未来负荷）
-```
+<img src="./../img/TF_frame.png" class="h-80 mx-5 border-2 border-gray-300 rounded-lg shadow-xl" />
 
 > 🔍 能源领域常用变体：**Informer**（2021）、**PatchTST**（2023）、**iTransformer**（2024）
 
