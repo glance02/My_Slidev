@@ -93,14 +93,11 @@ LSTM 和 Transformer 分别从不同角度解决了这两个问题。
 -->
 
 ---
-layout: default
+layout: two-cols
+class: my-auto
 ---
 
 # 从 RNN 的困境说起
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
 
 ### RNN 的理论与现实
 
@@ -114,22 +111,9 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 
 序列越长，早期信息在反向传播时梯度指数级衰减，模型实际上"遗忘"了很久之前的信息。
 
-</div>
+::right::
 
-<v-click>
-<div>
-
-### 用一个比喻理解
-
-想象你在读一篇长报告：
-- **RNN**：读完就忘，只记得最后几段
-- **LSTM**：有便利贴，重要内容主动记下来，不重要的随时划掉
-- **Transformer**：把整篇报告摊开，同时扫一遍，注意力直接聚焦关键段落
-
-</div>
-
-</v-click>
-</div>
+<img src="./../img/RNN.png" class="h-80 m-6" />
 
 <!--
 这页是过渡页，帮助听众建立直觉理解，然后自然引出LSTM和Transformer
