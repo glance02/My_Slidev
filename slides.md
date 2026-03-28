@@ -30,7 +30,7 @@ layout: two-cols
 # 目录
 
 <div class="mt-4 h-[360px] flex flex-col gap-4">
-  <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
+  <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5 mr">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 01</div>
     <div class="font-semibold">为什么需要智慧能源？</div>
     <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
@@ -39,7 +39,7 @@ layout: two-cols
     </ul>
   </div>
 
-  <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
+  <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5 mr">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 02</div>
     <div class="font-semibold">LSTM 在智慧能源中的应用</div>
     <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
@@ -53,7 +53,7 @@ layout: two-cols
 
 <div class="h-[40px]" aria-hidden="true"></div>
 
-<div class="mt-4 h-[360px] flex flex-col gap-4">
+<div class="mt-4 h-[360px] flex flex-col gap-4 mx">
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 03</div>
     <div class="font-semibold">Transformer 在智慧能源中的应用</div>
@@ -130,7 +130,9 @@ layout: default
 
 </div>
 
-<!-- 核心对比：LSTM 胜在轻量、经典；Transformer 胜在全局视野、精度 -->
+<!--
+核心对比：LSTM 胜在轻量、经典；Transformer 胜在全局视野、精度
+-->
 
 ---
 layout: default

@@ -10,6 +10,33 @@ LSTM：给RNN装上了"记忆门"，让模型学会有选择地遗忘与记忆
 -->
 
 ---
+layout: two-cols
+class: my-auto
+---
+
+# 从 RNN 的困境说起
+
+### RNN 的理论与现实
+
+RNN（循环神经网络）是处理序列数据的经典方法，核心思想是：
+
+> 每一步的输出，既依赖当前输入，也依赖上一步的**隐藏状态** $h_{t-1}$
+
+$$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
+
+**问题：梯度消失**
+
+序列越长，早期信息在反向传播时梯度指数级衰减，模型实际上"遗忘"了很久之前的信息。
+
+::right::
+
+<img src="./../img/RNN.png" class="h-80 m-6" />
+
+<!--
+这页是过渡页，帮助听众建立直觉理解，然后自然引出LSTM和Transformer
+-->
+
+---
 layout: center
 ---
 
@@ -72,15 +99,12 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 </div>
 
-<div class="flex flex-col justify-center text-sm">
-
-<img src="/img/lstm_shape.png" class="h-54 mx-auto">
+<img src="/img/lstm_shape.png" class="h-60 mx-auto rounded-lg my-20" />
 
 <div class="mt-3 text-gray-500">
 🔑 关键洞察：细胞状态像"高速公路"，梯度可以直接流过，有效缓解梯度消失
 </div>
 
-</div>
 </div>
 
 <!--
