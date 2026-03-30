@@ -6,7 +6,6 @@ layout: section
 ## Transformer 与智慧能源
 
 <!-- Transformer：用"注意力"替代"记忆"，一次看全整段序列 -->
-
 ---
 layout: two-cols
 class: my-auto
@@ -29,268 +28,238 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\r
 
 ::right::
 
-<img src="./../img/Transformer.png" class="h-95 mx-20" />
+<img src="./../img/Transformer.png" class="h-95 mx-20 mt-15 rounded-2xl" />
 
+---
+layout: two-cols
+class: my-auto
+---
+
+# Transformer直观理解
+
+<v-clicks>
+
+想象你是一个大型园区的能源管理者，面前有这些资产需要调度：
+
+- 🏢 **几十栋楼宇** — 空调怎么调？能耗怎么控？
+- ☀️ **一座光伏电站** — 今天的发电量怎么预测？
+- 🔋 **两座储能站** — 什么时候充放电？容量如何分配？
+- ⚡ **一排充电桩** — 要不要限制功率？
+
+</v-clicks>
+
+::right::
+
+<img src="./../img/园区能源.png" class="h-95 mt-15 rounded-xl" />
+
+---
+layout: two-cols
+class: my-auto
+---
+
+# 传统方法
+
+<v-clicks>
+
+把不同决策分开来做：
+
+- 📊 **负荷预测**（模型 A）— 查看历史用电数据
+- ☀️ **光伏预测**（模型 B）— 查看天气预报
+- 🔋 **储能优化**（模型 C）— 查看电池状态
+
+</v-clicks>
+
+<v-click>
+
+**最后人工协调** → **效率低且容易出错**
+
+> 就像请了三个不同的专家，各看各的数据，最后开会商量
+
+</v-click>
+
+::right::
+
+<v-click>
+
+# Transformer
+
+
+
+**一张”大表格”汇聚所有数据**：过去一个月的负荷、未来三天的天气预报、每辆车的充电习惯、储能电池的健康状态……
+
+</v-click>
+
+<v-click>
+
+**自注意力机制自动发现关联**
+
+- 🏢↔🏢 空调负荷与隔壁楼办公人数强相关
+- 🔋→⚡ 下午三点前留出容量，因为四点有充电高峰
+
+</v-click>
+
+<v-click>
+
+Transformer提供“全局感知的预测或状态表示”，再用于优化或决策
+
+</v-click>
+
+
+
+---
+layout: statement
+---
+
+# “互相感知”
+
+Transformer 在能源领域最朴素的价值：
+
+不是做一个更准的预测，
+
+而是让所有的预测和决策能够**互相感知**。
 
 ---
 layout: default
 ---
 
-# Transformer 用于能源预测的架构
-
-<div class="mt-2 grid grid-cols-2 gap-6">
-
-<div>
-
-### 标准 Encoder-Decoder 架构
-
-<img src="./../img/TF_frame.png" class="h-80 mx-5 border-2 border-gray-300 rounded-lg shadow-xl" />
-
-> 🔍 能源领域常用变体：**Informer**（2021）、**PatchTST**（2023）、**iTransformer**（2024）
-
+<div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
+  <iframe
+    src="//player.bilibili.com/player.html?isOutside=true&aid=586825595&bvid=BV1Zz4y127h1&cid=302259616&p=1"
+    allowfullscreen="true"
+    class="w-full h-full"
+  ></iframe>
 </div>
 
-<div>
 
-### PyTorch 简单实现
 
-````md magic-move
-```python
-import torch.nn as nn
+---
+layout: section
+---
 
-class EnergyTransformer(nn.Module):
-    """
-    初始化参数说明：
-    - input_size: 每个时间步的输入特征数（如负荷、温度、湿度等）
-    - d_model: Transformer 内部隐藏表示维度
-    - pred_len: 需要预测的未来时间步长度
-    """
-    def __init__(self, 
-                input_size=8, 
-                d_model=64,   
-                pred_len=24): 
-        super().__init__()
-        # 输入投影
-        self.input_proj = nn.Linear(input_size, d_model)
-        self.output_proj = nn.Linear(d_model, pred_len)
-```
+# Transformer 案例
 
-```python
-import torch.nn as nn
+---
+layout: two-cols
+class: my-auto
+---
 
-class EnergyTransformer(nn.Module):
-    def __init__(self, input_size=8, d_model=64,
-                 nhead=8,       # 多头注意力头数
-                 num_layers=2,  # 编码器层数
-                 pred_len=24):  # 预测步长
-        super().__init__()
-        self.input_proj = nn.Linear(input_size, d_model)
+# 绿氢背后的“调度大脑”
 
-        # Transformer 编码器
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=nhead,
-            dim_feedforward=256,
-            dropout=0.1,
-            batch_first=True
-        )
-        self.encoder = nn.TransformerEncoder(
-            encoder_layer, num_layers=num_layers)
-        self.output_proj = nn.Linear(d_model, pred_len)
-```
+[内蒙古多伦，大唐集团煤化工基地](https://sklict.zju.edu.cn/2025/0724/c85586a3071334/page.htm)
 
-```python
-import torch.nn as nn
+<v-clicks depth="2">
 
-class EnergyTransformer(nn.Module):
-    def __init__(self, input_size=8, d_model=64,
-                 nhead=8, num_layers=2, pred_len=24): 
-        super().__init__()
-        self.input_proj = nn.Linear(input_size, d_model)
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model, nhead=nhead, 
-            dim_feedforward=256,
-            dropout=0.1, batch_first=True
-        )
-        self.encoder = nn.TransformerEncoder(
-                encoder_layer, num_layers=num_layers)
-        self.output_proj = nn.Linear(d_model, pred_len)
+- 传统：煤制氢，碳排放强度高
+- 改变：周边光、风资源丰富 → **绿电制绿氢**
+- 挑战：风电和光伏天然具有波动性，而电解槽的连续运行和化工厂的稳定用氢需求之间存在刚性约束
+  - 频繁制氢 → 设备寿命缩短
+  - 保守运行 → 绿氢替代率低
 
-    def forward(self, x):
-        # x: (batch, seq_len, features)
-        x = self.input_proj(x)
-        h = self.encoder(x)
-        return self.output_proj(h[:, -1, :])
-```
-````
+</v-clicks>
 
-</div>
+::right::
+
+<img src="./../img/大唐多伦化工厂.png" class="h-70 rounded-xl mx-auto mt-10" />
+
+---
+layout: two-cols
+---
+
+<img src="./../img/大唐中控技术.png" class="h-110 rounded-xl mt-5" />
+
+::right::
+
+## Transformer多能源协同优化模型
+
+<v-clicks>
+
+**多路数据输入**：气象预报 / 风光出力 / 用氢需求 / 电解槽状态
+
+**核心机制**：Self-Attention机制学习风光资源与生产负荷在不同时间尺度下的耦合关系，同时在设备启停、储氢罐容量、电网交互等工业约束下，滚动生成优化的 24 小时调度指令
+
+</v-clicks>
+
+<v-click>
+
+### 结果：绿氢占比 **29.54% → 54.3%**
+
+| 指标 | 数值 |
+|------|------|
+| 可再生能源替代率 | **87.5%** |
+| 年减碳 | **42 万吨** |
+
+</v-click>
+
+---
+layout: two-cols
+class: my-auto
+---
+
+# 从“一地一模型”到统一大模型
+
+[科大讯飞 · 羚羊能源大模型 3.0](https://ah.people.com.cn/n2/2024/1110/c358428-41035972.html)
+
+<v-clicks depth="2">
+
+- 痛点：风电场故障模型 → 无法迁移到光伏电站
+- “一地一模型”模式 → 严重制约 AI 规模化落地
+- 思路：基于 Transformer，将时序数据映射到**语义空间**
+- 新场站仅需少量数据微调（few-shot learning），即可快速适配
+
+</v-clicks>
+
+::right::
+
+<div class="mt-15 ml-10">
+  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5 mb-6">
+    <div class="text-sm text-gray-400 mb-2">传统故障预警准确率</div>
+    <div class="text-5xl font-bold text-red-400">72%</div>
+  </div>
+  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5">
+    <div class="text-sm text-gray-400 mb-2">新场站部署周期</div>
+    <div class="text-5xl font-bold text-yellow-400">3 周</div>
+  </div>
 </div>
 
 ---
-layout: default
+layout: two-cols
+class: my-auto
 ---
 
-# 应用案例：光伏发电量预测
+## 统一时序基础框架
 
-<div class="mt-2">
+<v-clicks>
 
-**任务**：利用历史功率 + 气象数据（辐照度、温度、云量），预测未来 24~48 小时光伏电站出力。
+**技术路线**：千亿级数据自监督学习，构建统一时序基础模型
 
-</div>
+**两大应用场景**：
+- 🔌 **电力交易** — 功率、负荷、电价精准预测
+- 🔧 **设备运维** — 自然语言交互式故障诊断
 
-<div class="grid grid-cols-2 gap-6 mt-3">
+**自然语言交互**：运维人员可直接提问
 
-<div>
+> “风机齿轮箱最近一周有无异常？”
 
-### 为什么 Transformer 更适合这个任务？
+模型返回预警信号 + 原因分析 + 维修建议
 
-**光伏功率的特点**：
-- 受天气影响，具有**长程周期性**（今天正午与昨天正午高度相关）
-- 云遮蔽造成**突变**，短时波动大
-- 多气象变量之间有**复杂交互**
+</v-clicks>
 
-Transformer 的注意力机制能跨越长时间窗口直接建立关联，特别适合捕捉 **"今天中午 → 昨天中午"** 这类跨天依赖。
+::right::
 
-> Kim et al. (2024), *Renewable and Sustainable Energy Reviews* —— Transformer 混合模型比单纯 LSTM **误差降低 48.3%**
+<v-click>
 
-</div>
+### 落地成果
 
-<div>
+| 场景 | 指标 | 效果 |
+|------|------|------|
+| 故障预警 | 准确率 | 72% → **91%** |
+| 模型部署 | 周期 | 3周 → **2天** |
+| 蒙城风电场 | 考核电量 | 减少 **50%+** |
+| 功率预测 | 准确率 | 提升 **5%+** |
+| 负荷预测 | 准确率 | **94.8%** |
+| 故障排查 | 时间 | 缩短 **73%** |
+| 运维效率 | 整体提升 | **30%+** |
 
-### 预测效果示意
+依托星火 X1.5 技术底座，连续三年入选工信部”双跨”平台
 
-```
-光伏功率预测（晴天 vs 多云对比）
-
-MW
-5  │    ╭─────╮
-   │  ╭╯  晴天 ╰╮    实际 ───
-4  │ ╱           ╰╮  预测 ─ ─
-   │╱              ╰╮
-3  │                ╰──
-   │
-2  │  多云天（波动大）
-   │ ╱╲  ╱╲  ╱╲  ╱
-1  │╱  ╲╱  ╲╱  ╲╱
-   └─────────────────→ 时 (h)
-    6   9   12  15  18
-
-评估指标（典型水平）：
-  R²    ≈ 0.92 ~ 0.97（晴天）
-  MAPE  ≈ 3% ~ 8%（多云）
-```
-
-<div class="text-sm text-gray-500 mt-2">
-
-📌 配图参考（论文截图）：  
-https://www.mdpi.com/1996-1073/17/17/4426  
-（TransPVP, Fig. 5 光伏预测对比图，MDPI Energies 2024）
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# 能源领域专用 Transformer 变体：Informer
-
-<div class="grid grid-cols-2 gap-6 mt-3">
-
-<div>
-
-### 标准 Transformer 的瓶颈
-
-标准自注意力复杂度为 $O(L^2)$，序列长度 $L$ 翻倍则计算量翻四倍。
-
-对于能源预测，往往需要处理**数周**的历史数据（序列长度数千步），标准 Transformer 计算代价极高。
-
-### Informer 的解决思路（Zhou et al., 2021, AAAI）
-
-引入 **ProbSparse Self-Attention**：
-
-$$\text{只保留注意力分数最高的} k \text{ 个 Query}$$
-
-复杂度降为 $O(L \log L)$，在保持精度的同时支持**超长序列预测**（Long-term Forecasting）。
-
-</div>
-
-<div>
-
-### 实验对比（ETT 能源数据集）
-
-| 模型 | 预测 48h | 预测 720h |
-|------|---------|---------|
-| LSTM | MSE 0.752 | — (失败) |
-| Informer | MSE 0.577 | MSE 0.891 |
-| PatchTST | MSE 0.421 | MSE 0.668 |
-| iTransformer | **MSE 0.388** | **MSE 0.612** |
-
-> ETT（Electricity Transformer Temperature）是常用能源时序基准数据集
-
-<div class="mt-3 text-sm text-gray-500">
-
-📌 配图参考：  
-https://arxiv.org/html/2408.16202v2  
-（综述 Fig. 负荷预测模型对比，arXiv 2024）
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# 注意力可视化：模型"看到了什么"？
-
-<div class="mt-3 grid grid-cols-2 gap-6">
-
-<div>
-
-Transformer 一个独特优势是**可解释性**：通过可视化注意力权重，可以直观看到模型在预测时关注了哪些历史时刻。
-
-### 典型发现
-
-在电力负荷预测中，注意力图常显示：
-
-- **同一天的前7天**（上周同一工作日）权重最高
-- **前一天同时段**次之
-- **节假日边界**处权重有异常
-
-这与领域专家的经验一致：负荷具有**日周期性**和**周周期性**。
-
-> 注意力权重为模型提供了一种"自解释"能力，在电力行业部署中有重要价值
-
-</div>
-
-<div>
-
-### 注意力热力图示意
-
-```
-注意力权重矩阵（预测目标 vs 历史时刻）
-
-查询时刻 ↓ / 历史时刻 →
-         -168h -48h -24h -1h  now
-今日8时  [ 0.8  0.3  0.7  0.4  0.1 ]
-今日12时 [ 0.6  0.2  0.8  0.3  0.1 ]
-今日18时 [ 0.7  0.4  0.6  0.5  0.2 ]
-
-颜色越深 = 注意力越强
-■■■□□  ← 上周同时段（-168h）最受关注
-■□■□□  ← 昨天同时段（-24h）次之
-```
-
-<div class="mt-3 border-l-4 border-purple-400 pl-3 text-sm">
-
-💡 这种可解释性在实际电力系统部署中尤为重要——调度员需要理解模型"为什么这么预测"，才愿意信任并采用
-
-</div>
-
-</div>
-</div>
+</v-click>
