@@ -20,7 +20,6 @@ fonts:
 <div class="pt-6 text-gray-400">
   深度学习 · 智慧能源 · 时序预测
 </div>
-
 <!-- 开场白：能源是现代社会的血液，而如何让能源系统"更聪明"，正是我们今天要探讨的主题。 -->
 
 ---
@@ -86,53 +85,6 @@ src: ./pages/lstm.md
 src: ./pages/transformer.md
 ---
 
----
-layout: default
----
-
-# 总结：两种模型的对比
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div >
-
-### 🔁 LSTM
-
-| 特性 | 描述 |
-|------|------|
-| 擅长 | 短中期时序建模 |
-| 输入 | 顺序处理，逐步传递 |
-| 优势 | 门控机制，遗忘有选择 |
-| 适用 | 负荷预测、异常检测 |
-| 局限 | 长期依赖仍有衰减 |
-
-</div>
-
-
-<div>
-
-### ⚡ Transformer
-
-| 特性 | 描述 |
-|------|------|
-| 擅长 | 长期依赖、并行计算 |
-| 输入 | 全局注意力，一次看全 |
-| 优势 | 多头注意力，捕捉复杂关系 |
-| 适用 | 可再生能源、能源管理 |
-| 局限 | 数据量要求高，计算资源多 |
-
-</div>
-</div>
-
-<div class="mt-4 text-center text-gray-500 text-sm">
-
-💡 实践中两者常结合使用，如 **CNN-LSTM**、**LSTM-Transformer** 混合架构
-
-</div>
-
-<!--
-核心对比：LSTM 胜在轻量、经典；Transformer 胜在全局视野、精度
--->
 
 ---
 layout: default

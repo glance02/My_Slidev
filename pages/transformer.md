@@ -165,7 +165,7 @@ class: my-auto
 layout: two-cols
 ---
 
-<img src="./../img/大唐中控技术.png" class="h-100 rounded-xl mt-10" />
+<img src="./../img/大唐中控技术.png" class="h-110 rounded-xl mt-5" />
 
 ::right::
 
@@ -190,7 +190,76 @@ layout: two-cols
 
 </v-click>
 
---- 
-layout: default
+---
+layout: two-cols
+class: my-auto
 ---
 
+# 从“一地一模型”到统一大模型
+
+[科大讯飞 · 羚羊能源大模型 3.0](https://ah.people.com.cn/n2/2024/1110/c358428-41035972.html)
+
+<v-clicks depth="2">
+
+- 痛点：风电场故障模型 → 无法迁移到光伏电站
+- “一地一模型”模式 → 严重制约 AI 规模化落地
+- 思路：基于 Transformer，将时序数据映射到**语义空间**
+- 新场站仅需少量数据微调（few-shot learning），即可快速适配
+
+</v-clicks>
+
+::right::
+
+<div class="mt-15 ml-10">
+  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5 mb-6">
+    <div class="text-sm text-gray-400 mb-2">传统故障预警准确率</div>
+    <div class="text-5xl font-bold text-red-400">72%</div>
+  </div>
+  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5">
+    <div class="text-sm text-gray-400 mb-2">新场站部署周期</div>
+    <div class="text-5xl font-bold text-yellow-400">3 周</div>
+  </div>
+</div>
+
+---
+layout: two-cols
+class: my-auto
+---
+
+## 统一时序基础框架
+
+<v-clicks>
+
+**技术路线**：千亿级数据自监督学习，构建统一时序基础模型
+
+**两大应用场景**：
+- 🔌 **电力交易** — 功率、负荷、电价精准预测
+- 🔧 **设备运维** — 自然语言交互式故障诊断
+
+**自然语言交互**：运维人员可直接提问
+
+> “风机齿轮箱最近一周有无异常？”
+
+模型返回预警信号 + 原因分析 + 维修建议
+
+</v-clicks>
+
+::right::
+
+<v-click>
+
+### 落地成果
+
+| 场景 | 指标 | 效果 |
+|------|------|------|
+| 故障预警 | 准确率 | 72% → **91%** |
+| 模型部署 | 周期 | 3周 → **2天** |
+| 蒙城风电场 | 考核电量 | 减少 **50%+** |
+| 功率预测 | 准确率 | 提升 **5%+** |
+| 负荷预测 | 准确率 | **94.8%** |
+| 故障排查 | 时间 | 缩短 **73%** |
+| 运维效率 | 整体提升 | **30%+** |
+
+依托星火 X1.5 技术底座，连续三年入选工信部”双跨”平台
+
+</v-click>
