@@ -3,7 +3,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   src: { type: String, required: true },
-  class: { type: String, default: '' },
 })
 
 const fullscreen = ref(false)
