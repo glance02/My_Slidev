@@ -77,6 +77,20 @@ layout: center
 layout: default
 ---
 
+<div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
+  <iframe
+    src="//player.bilibili.com/player.html?isOutside=true&aid=808976670&bvid=BV1Z34y1k7mc&cid=506125891&p=1"
+    allowfullscreen="true"
+    class="w-full h-full"
+  ></iframe>
+</div>
+
+<!-- 看到3.30就够了 -->
+
+---
+layout: default
+---
+
 # LSTM 的核心设计：三个门
 
 <div class="grid grid-cols-2 gap-6 mt-2">
