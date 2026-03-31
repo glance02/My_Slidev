@@ -30,7 +30,7 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 
 ::right::
 
-<img src="./../img/RNN.png" class="h-80 m-6" />
+<FullscreenImg src="./../img/RNN.png" class="h-80 m-6 rounded-xl" />
 
 <!--
 于是LSTM的设计者提出了"长短期记忆"的概念，来解决RNN的这个问题
@@ -104,7 +104,7 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 <FullscreenImg src="/img/lstm_shape.png" class="h-60 mx-auto rounded-lg my-20" />
 
-<div class="mt-3 text-gray-500">
+<div class="mt-6 text-gray-500">
 🔑 关键洞察：细胞状态像"高速公路"，梯度可以直接流过，有效缓解梯度消失
 </div>
 
@@ -113,7 +113,6 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 <!--
 重点讲三个门的直觉，不要陷入公式细节
 -->
-
 
 ---
 layout: default

@@ -6,29 +6,6 @@ layout: section
 ## Transformer 与智慧能源
 
 <!-- Transformer：用"注意力"替代"记忆"，一次看全整段序列 -->
----
-layout: two-cols
-class: my-auto
----
-
-# Transformer 的核心：自注意力机制
-
-Transformer 来自 2017 年 Google 的论文  
-**"Attention is All You Need"**（Vaswani et al.）
-
-**核心思想**：序列中的每个位置，都能直接"关注"到其他任意位置，无需逐步传递。
-
-**自注意力计算**：
-
-$$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$
-
-- $Q$（Query）：当前位置"想要什么"
-- $K$（Key）：其他位置"提供什么"
-- $V$（Value）：实际携带的信息
-
-::right::
-
-<img src="./../img/Transformer.png" class="h-95 mx-20 mt-15 rounded-2xl" />
 
 ---
 layout: two-cols
@@ -117,6 +94,30 @@ Transformer 在能源领域最朴素的价值：
 不是做一个更准的预测，
 
 而是让所有的预测和决策能够**互相感知**。
+
+---
+layout: two-cols
+class: my-auto
+---
+
+# Transformer 的核心：自注意力机制
+
+Transformer 来自 2017 年 Google 的论文  
+**"Attention is All You Need"**（Vaswani et al.）
+
+**核心思想**：序列中的每个位置，都能直接"关注"到其他任意位置，无需逐步传递。
+
+**自注意力计算**：
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$
+
+- $Q$（Query）：当前位置"想要什么"
+- $K$（Key）：其他位置"提供什么"
+- $V$（Value）：实际携带的信息
+
+::right::
+
+<img src="./../img/Transformer.png" class="h-95 mx-20 mt-15 rounded-2xl" />
 
 ---
 layout: default

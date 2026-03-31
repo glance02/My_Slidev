@@ -5,10 +5,10 @@ info: |
   ## 深度学习与智慧能源
   探索 LSTM 与 Transformer 在智慧能源系统中的应用
 highlighter: shiki
-drawings:
-  persist: false
 transition: slide-left
-mdc: true
+themeConfig:
+  baseColor: 'green' 
+  colorPattern: 'single' 
 fonts:
   sans: SimSun
 ---
