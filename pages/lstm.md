@@ -99,24 +99,28 @@ layout: default
 
 LSTM（Long Short-Term Memory，长短期记忆网络）由 Hochreiter & Schmidhuber 于 **1997** 年提出，核心在于引入**细胞状态** $C_t$ 和三个门控机制：
 
-**① 遗忘门** $f_t$：决定丢弃什么旧记忆
+**① 遗忘门** $\mathbf{F}_t$：决定丢弃什么旧记忆
 
-$$f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
+$$\mathbf{F}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xf} + \mathbf{H}_{t-1} \mathbf{W}_{hf} + \mathbf{b}_f)$$
 
-**② 输入门** $i_t$：决定写入什么新信息
+**② 输入门** $\mathbf{I}_t$：决定写入什么新信息
 
-$$i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
+$$\mathbf{I}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xi} + \mathbf{H}_{t-1} \mathbf{W}_{hi} + \mathbf{b}_i)$$
 
-**③ 输出门** $o_t$：决定输出什么内容
+**③ 输出门** $\mathbf{O}_t$：决定输出什么内容
 
-$$o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
+$$\mathbf{O}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xo} + \mathbf{H}_{t-1} \mathbf{W}_{ho} + \mathbf{b}_o)$$
 
-细胞状态更新：
-$$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
+**细胞状态**$\mathbf{C}_t$更新：
+
+$$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t.$$
+
 
 </div>
 
-<FullscreenImg src="/img/lstm_shape.png" class="h-60 mx-auto rounded-lg my-20" />
+<div>
+
+<FullscreenImg src="./../img/lstm.svg" class="h-60 mx-auto rounded-lg my-12 bg-white" />
 
 <div class="mt-6 text-gray-500">
 🔑 关键洞察：细胞状态像"高速公路"，梯度可以直接流过，有效缓解梯度消失
@@ -124,6 +128,7 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 </div>
 
+</div>
 <!--
 重点讲三个门的直觉，不要陷入公式细节
 -->
@@ -143,19 +148,8 @@ hide: true
 </iframe>
 
 ---
-layout: default
+src: ./lstmExample.md
 ---
-
-# LSTM 在智慧能源领域的核心应用
-
-智慧能源的核心需求是实现“源、网、荷、储”全链条的智能化调控，提升能源利用效率、保障能源供应安全、推动低碳转型。
-
-1. 可再生能源发电功率预测
-2. 电力负荷预测
-3. 电网调度与能源优化
-4. 储能系统优化控制
-
-
 
 
 ---
