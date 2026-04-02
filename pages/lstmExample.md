@@ -1,6 +1,5 @@
 ---
-layout: default
-background: '#0f172a'
+layout: center
 ---
  
 # 案例一：比利时国家电网负荷预测
@@ -22,7 +21,7 @@ background: '#0f172a'
  
 <div class="flex flex-col gap-3">
   <div class="rounded-xl overflow-hidden border border-slate-700/60 bg-slate-800/50">
-    <img src="./../img/lstm/case1.png" alt="Elia 电网预测值 vs 真实值" class="w-full object-cover" />
+    <img src="/img/lstm/case1.png" alt="Elia 电网预测值 vs 真实值" class="w-full object-cover" />
     <p class="text-slate-500 text-xs px-3 py-2">图：预测负荷（橙）与真实负荷（蓝）对比，来源 Fig. 2，Dakheel & Çevik 2025</p>
   </div>
 </div>
@@ -30,8 +29,7 @@ background: '#0f172a'
 </div>
  
 ---
-layout: default
-background: '#0f172a'
+layout: center
 ---
  
 # 案例一：结果与意义
@@ -68,8 +66,7 @@ background: '#0f172a'
 </div>
  
 ---
-layout: default
-background: '#0f172a'
+layout: center
 ---
  
 # 案例二：埃及 Aswan 光伏微电网氢储能调度
@@ -99,8 +96,7 @@ background: '#0f172a'
 </div>
  
 ---
-layout: default
-background: '#0f172a'
+layout: center
 ---
  
 # 案例二：结果与意义

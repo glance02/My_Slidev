@@ -14,7 +14,7 @@ layout: default
 
 # 能源系统正面临前所未有的挑战
 
-<img src="./img/../../img/Intro/pic1.png" class="h-80 float-right mt-6 rounded-xl" />
+<img src="./../img/Intro/pic1.png" class="h-80 float-right mt-6 rounded-xl" />
 
 ### 三大核心矛盾
 

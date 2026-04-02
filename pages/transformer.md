@@ -27,7 +27,7 @@ class: my-auto
 
 ::right::
 
-<img src="./../img/园区能源.png" class="h-95 mt-15 rounded-xl" />
+<img src="/img/transformer/园区能源.png" class="h-95 mt-15 rounded-xl" />
 
 ---
 layout: two-cols
@@ -117,10 +117,11 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\r
 
 ::right::
 
-<img src="./../img/Transformer.png" class="h-95 mx-20 mt-15 rounded-2xl" />
+<img src="/img/transformer/Transformer.png" class="h-95 mx-20 mt-15 rounded-2xl" />
 
 ---
 layout: default
+hide: true
 ---
 
 <div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
@@ -160,13 +161,13 @@ class: my-auto
 
 ::right::
 
-<img src="./../img/大唐多伦化工厂.png" class="h-70 rounded-xl mx-auto mt-10" />
+<img src="/img/transformer/大唐多伦化工厂.png" class="h-70 rounded-xl mx-auto mt-10" />
 
 ---
 layout: two-cols
 ---
 
-<img src="./../img/大唐中控技术.png" class="h-110 rounded-xl mt-5" />
+<img src="/img/transformer/大唐中控技术.png" class="h-110 rounded-xl mt-5" />
 
 ::right::
 

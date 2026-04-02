@@ -30,7 +30,7 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 
 ::right::
 
-<FullscreenImg src="./../img/RNN.png" class="h-80 m-6 rounded-xl" />
+<FullscreenImg src="/img/lstm/RNN.png" class="h-80 m-6 rounded-xl" />
 
 <!--
 于是LSTM的设计者提出了"长短期记忆"的概念，来解决RNN的这个问题
@@ -75,6 +75,7 @@ layout: center
 
 ---
 layout: default
+hide: true
 ---
 
 <div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
@@ -120,7 +121,7 @@ $$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde
 
 <div>
 
-<FullscreenImg src="./../img/lstm.svg" class="h-60 mx-auto rounded-lg my-12 bg-white" />
+<FullscreenImg src="/img/lstm/lstm.svg" class="h-60 mx-auto rounded-lg my-12 bg-white" />
 
 <div class="mt-6 text-gray-500">
 🔑 关键洞察：细胞状态像"高速公路"，梯度可以直接流过，有效缓解梯度消失
@@ -147,10 +148,66 @@ hide: true
   frameborder="0">
 </iframe>
 
+
+---
+layout: two-cols
+class: my-auto
+---
+
+# lstm的代码实现
+
+**① 遗忘门** $\mathbf{F}_t$：决定丢弃什么旧记忆
+
+$$\mathbf{F}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xf} + \mathbf{H}_{t-1} \mathbf{W}_{hf} + \mathbf{b}_f)$$
+
+**② 输入门** $\mathbf{I}_t$：决定写入什么新信息
+
+$$\mathbf{I}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xi} + \mathbf{H}_{t-1} \mathbf{W}_{hi} + \mathbf{b}_i)$$
+
+**③ 输出门** $\mathbf{O}_t$：决定输出什么内容
+
+$$\mathbf{O}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xo} + \mathbf{H}_{t-1} \mathbf{W}_{ho} + \mathbf{b}_o)$$
+
+**细胞状态**$\mathbf{C}_t$更新：
+
+$$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t.$$
+
+
+::right::
+
+
+```python
+# LSTM 的核心代码
+def lstm(inputs, state, params):
+    [W_xi, W_hi, b_i, W_xf, W_hf, b_f, 
+     W_xo, W_ho, b_o, W_xc, W_hc, b_c,
+     W_hq, b_q] = params
+    (H, C) = state
+    outputs = []
+    for X in inputs:
+        # @ 表示矩阵乘法，* 表示元素级乘法
+        F = torch.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
+        I = torch.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
+        O = torch.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
+        C_tilda = torch.tanh((X @ W_xc) + (H @ W_hc) + b_c)
+        C = F * C + I * C_tilda
+        H = O * torch.tanh(C)
+        Y = (H @ W_hq) + b_q
+        outputs.append(Y)
+    return torch.cat(outputs, dim=0), (H, C)
+```
+
+---
+layout: default
+---
+
+# LSTM的简洁实现
+
+<img src="/img/lstm/简洁实现.png" class="w-full rounded-xl shadow-2xl border border-gray-700" />
+
 ---
 src: ./lstmExample.md
 ---
-
 
 ---
 layout: default
