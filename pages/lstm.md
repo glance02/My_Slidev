@@ -6,7 +6,7 @@ layout: section
 ## LSTM 与智慧能源
 
 <!--
-LSTM：给RNN装上了"记忆门"，让模型学会有选择地遗忘与记忆
+认真听课的同学肯定会注意到这个模型是老师上课讲过的模型，我们组在老师讲到这里之前，已经找好了相关的资料，所以会在老师讲解的基础上增加一些深度和宽度
 -->
 
 ---
@@ -33,7 +33,7 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 <FullscreenImg src="/img/lstm/RNN.png" class="h-80 m-6 rounded-xl" />
 
 <!--
-于是LSTM的设计者提出了"长短期记忆"的概念，来解决RNN的这个问题
+如何解决这个问题呢？
 -->
 
 ---
@@ -55,8 +55,11 @@ LSTM的设计或多或少的借鉴了人类对于自然语言处理的直觉性�
 
 “**纸好**”，“**没味道**”，“**便宜**”和“**做工好**”
 
-<!-- 这个解释有什么特点呢？ -->
+<!--
+如果是让我们自己去复述，其过程应该回事什么样子呢？
 
+会先总结出几个关键词，然后重新组织语言
+-->
 
 ---
 layout: center
@@ -75,18 +78,23 @@ layout: center
 
 ---
 layout: default
-hide: true
+
+# hide: true
 ---
 
 <div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
   <iframe
-    src="//player.bilibili.com/player.html?isOutside=true&aid=808976670&bvid=BV1Z34y1k7mc&cid=506125891&p=1"
+    src="//player.bilibili.com/player.html?isOutside=true&aid=808976670&bvid=BV1Z34y1k7mc&cid=506125891&p=1&autoplay=0"
     allowfullscreen="true"
     class="w-full h-full"
   ></iframe>
 </div>
 
-<!-- 看到3.30就够了 -->
+<!--
+看到3.30
+
+记日记这个解释真的非常绝
+-->
 
 ---
 layout: default
@@ -130,8 +138,11 @@ $$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde
 </div>
 
 </div>
+
 <!--
-重点讲三个门的直觉，不要陷入公式细节
+这些公式和这张图片都是出于李沐老师的《动手深度学习》中的开源代码。
+
+lstm是一个比较简单的模型，代码实现也比较简洁，所以在此展示一部分模型代码。
 -->
 
 ---
@@ -186,10 +197,14 @@ def lstm(inputs, state, params):
     outputs = []
     for X in inputs:
         # @ 表示矩阵乘法，* 表示元素级乘法
+        # 遗忘门
         F = torch.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
+        #输入门
         I = torch.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
+        # 输出门
         O = torch.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
         C_tilda = torch.tanh((X @ W_xc) + (H @ W_hc) + b_c)
+        # 细胞状态更新
         C = F * C + I * C_tilda
         H = O * torch.tanh(C)
         Y = (H @ W_hq) + b_q
@@ -204,6 +219,13 @@ layout: default
 # LSTM的简洁实现
 
 <img src="/img/lstm/简洁实现.png" class="w-full rounded-xl shadow-2xl border border-gray-700" />
+
+
+<!-- 使用高级API，我们可以直接实例化`LSTM`模型。高级API封装了前文介绍的所有配置细节。 
+
+在这里要提到，LSTM只是一个基础模型，在实际工程中我们会在LSTM上面加入许多不同的算法或模型组件来提升性能
+
+-->
 
 ---
 src: ./lstmExample.md

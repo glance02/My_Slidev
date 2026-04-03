@@ -14,13 +14,13 @@ layout: default
 
 # 能源系统正面临前所未有的挑战
 
-<img src="./../img/Intro/pic1.png" class="h-80 float-right mt-6 rounded-xl" />
+<img src="/img/Intro/pic1.png" class="h-80 float-right mt-6 rounded-xl" />
 
 ### 三大核心矛盾
 
-<v-clicks depth="2">
+<v-clicks depth="1">
 
-1. **供需不确定性上升**
+1. **可再生能源的间歇性**
    - 风能、光伏出力随天气剧烈波动
    - 2023年全球弃风弃光损失超过 **150 TWh**
 
@@ -28,65 +28,60 @@ layout: default
    - 电动汽车充电、数据中心用电急增
    - 用电峰谷差不断扩大
 
-3. **传统方法力不从心**
-   - 统计模型（ARIMA）难以捕捉非线性规律
-   - 物理模型对实时变化响应滞后
+3. **实时决策窗口极短**
+   - 电网频率偏差须在秒级内响应
+   - 调度系统需同时处理海量传感器数据
 
 </v-clicks>
 
 <!-- 强调：不是为了用深度学习而用，而是问题本身驱动了技术选择 -->
 
 ---
-layout: default
+layout: center
 ---
 
 # 传统方法的乏力
- 
-<p class="text-slate-400 text-xl mt-1">经典工具在新挑战面前接连碰壁</p>
- 
-<div class="grid grid-cols-2 gap-8 mt-8">
- 
-<div class="space-y-5">
- 
-<div class="flex gap-4 items-start bg-slate-800 rounded-xl p-4 border border-red-900/40">
-  <span class="text-2xl shrink-0">📉</span>
-  <div>
-    <h3 class="text-red-400 font-bold mb-1">统计模型（ARIMA / 回归）</h3>
-    <p class="text-slate-300 text-sm leading-relaxed">线性假设无法捕捉负荷的非线性与突变；高维多变量场景下陷入"维度诅咒"；对节假日、极端天气等结构性突变毫无感知</p>
+
+
+<div class="grid grid-cols-3 gap-8 mt-10">
+
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-4 h-4 rounded-full bg-red-500 shrink-0 ring-4 ring-red-500/20"></div>
+    <div>
+      <h3 class="text-red-400 font-bold text-base mb-2">线性假设与现实脱节</h3>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        ARIMA、回归模型以<span class="text-slate-200">线性关系</span>为根本前提。但负荷突变、可再生出力波动的本质是非线性过程——温度多升一度、云层多遮一秒，影响都不是线性叠加的。假设错了，精度的上限就已经注定。
+      </p>
+    </div>
   </div>
-</div>
- 
-<div class="flex gap-4 items-start bg-slate-800 rounded-xl p-4 border border-red-900/40">
-  <span class="text-2xl shrink-0">⚙️</span>
-  <div>
-    <h3 class="text-red-400 font-bold mb-1">传统优化（线性规划 / 凸优化）</h3>
-    <p class="text-slate-300 text-sm leading-relaxed">依赖专家手工规则与凸函数假设，难以处理离散变量与动态约束；求解实时调度时计算代价过高</p>
+
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-4 h-4 rounded-full bg-red-500 shrink-0 ring-4 ring-red-500/20"></div>
+    <div>
+      <h3 class="text-red-400 font-bold text-base mb-2">人工规则无法适应变化</h3>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        EMS / SCADA 的调度逻辑依赖专家<span class="text-slate-200">手工编写与维护</span>。电网拓扑一变、分布式资源一增、新能源占比一高，规则就要重写。系统的复杂度在指数增长，人工规则的覆盖能力只能线性扩展。
+      </p>
+    </div>
   </div>
-</div>
- 
-</div>
- 
-<div class="space-y-5">
- 
-<div class="flex gap-4 items-start bg-slate-800 rounded-xl p-4 border border-red-900/40">
-  <span class="text-2xl shrink-0">🌊</span>
-  <div>
-    <h3 class="font-bold mb-1">浅层机器学习（SVM / 随机森林）</h3>
-    <p class="text-slate-300 text-sm leading-relaxed">需要大量人工特征工程；时序长程依赖建模能力弱；对空间拓扑结构（如电网节点关系）无法端到端学习</p>
+
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-4 h-4 rounded-full bg-red-500 shrink-0 ring-4 ring-red-500/20"></div>
+    <div>
+      <h3 class="text-red-400 font-bold text-base mb-2">时序建模能力天然不足</h3>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        SVM、随机森林将每个时间点当作<span class="text-slate-200">独立样本</span>处理，时序中的日周期、周周期、跨季节依赖完全无从捕捉。没有记忆，就没有对"过去"的感知，预测自然失准。
+      </p>
+    </div>
   </div>
+
 </div>
- 
-<div class="flex gap-4 items-start bg-slate-800 rounded-xl p-4 border border-red-900/40">
-  <span class="text-2xl shrink-0">🔒</span>
-  <div>
-    <h3 class="text-red-400 font-bold mb-1">规则驱动系统（EMS / SCADA）</h3>
-    <p class="text-slate-300 text-sm leading-relaxed">规则由人工维护，无法自适应电网拓扑变化；在新型分布式场景下扩展性极差，难以覆盖长尾故障模式</p>
-  </div>
+
+<div class="mt-5 text-slate-500 text-sm border-t border-slate-800 pt-5">
+  这三个缺陷指向同一个根本问题：<span class="text-slate-300">传统方法对数据的假设，已经跟不上能源系统的现实。</span>
 </div>
- 
-</div>
- 
-</div>
+
+<!-- 这里总体提一下传统方法的不足之处  -->
 
 ---
 layout: default
@@ -146,3 +141,5 @@ layout: default
 <div class="mt-10 text-slate-500 text-sm border-t border-slate-800 pt-5">
   三个层次并非孤立模块——特征学习的质量决定预测上限，预测的不确定性直接塑造决策策略，构成<span class="text-slate-300">数据→预测→决策</span>的端到端智能链路。
 </div>
+
+<!-- 我们接下来主要介绍两个基础模型 -->

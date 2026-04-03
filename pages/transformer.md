@@ -132,6 +132,78 @@ hide: true
   ></iframe>
 </div>
 
+---
+layout: default
+---
+
+# 面向能源时序的 Transformer 变体
+
+<p class="text-slate-400 text-lg mt-1 mb-8">原始 Transformer 直接用于能源预测效果有限——研究者针对时序数据的特点对其进行了系统性改造</p>
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-5">
+
+  <!-- Informer -->
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-2 h-2 rounded-full bg-sky-400 shrink-0 ring-2 ring-sky-400/30 mt-2"></div>
+    <div>
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="text-sky-400 font-bold text-base">Informer</span>
+        <span class="text-slate-600 text-xs">Zhou et al., 2021 · AAAI Best Paper</span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        原始 Transformer 的注意力计算复杂度为 O(L²)，序列一长就慢得无法用于实际电网。Informer 引入 <span class="text-slate-200">ProbSparse 稀疏注意力</span>，只保留得分最高的 Top-k 注意力对，将复杂度降至 O(L log L)，使长序列（如一年 15 分钟粒度）的多步预测成为可能。常用于日前至周前的负荷与可再生出力预测。
+      </p>
+    </div>
+  </div>
+
+  <!-- TFT -->
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-2 h-2 rounded-full bg-rose-400 shrink-0 ring-2 ring-rose-400/30 mt-2"></div>
+    <div>
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="text-rose-400 font-bold text-base">TFT</span>
+        <span class="text-slate-600 text-xs">Temporal Fusion Transformer · Lim et al., 2021 · IJF</span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        专为工程落地设计：门控机制过滤无关输入，变量选择网络自动识别重要特征，注意力权重提供<span class="text-slate-200">可解释的时间步重要性输出</span>，可直接告知调度员"模型在关注哪个时段"。同时原生支持已知未来协变量（如节假日、计划检修）的输入，在工业能源管理系统（EMS）中已有真实部署案例。
+      </p>
+    </div>
+  </div>
+
+  <!-- iTransformer -->
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-2 h-2 rounded-full bg-amber-400 shrink-0 ring-2 ring-amber-400/30 mt-2"></div>
+    <div>
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="text-amber-400 font-bold text-base">iTransformer</span>
+        <span class="text-slate-600 text-xs">Liu et al., 2024 · ICLR</span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        提出"倒置"视角：将每个<span class="text-slate-200">变量（而非时间步）作为 token</span>，注意力机制因此建模的是变量之间的相关性（如温度与负荷、风速与出力之间的耦合），而前馈网络则负责编码各变量自身的时序表示。在引入多气象变量的电网预测中，其精度提升效率比 PatchTST 高出 3 倍。
+      </p>
+    </div>
+  </div>
+
+  <!-- FEDformer -->
+  <div class="flex gap-4 items-start">
+    <div class="mt-1 w-2 h-2 rounded-full bg-cyan-400 shrink-0 ring-2 ring-cyan-400/30 mt-2"></div>
+    <div>
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="text-cyan-400 font-bold text-base">FEDformer</span>
+        <span class="text-slate-600 text-xs">Zhou et al., 2022 · ICML</span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        将注意力计算从时域迁移至<span class="text-slate-200">频域（傅里叶变换）</span>，在频率空间中直接识别负荷或出力的主导周期成分，再做稀疏选择。这一设计使模型对能源数据中的周期性噪声天然鲁棒，在单变量预测任务上比 Autoformer 精度提升超过 22%，且计算效率更高。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="mt-6 border-t border-slate-800 pt-4 text-slate-500 text-xs">
+  核心规律：Informer 解决效率问题 → Autoformer / FEDformer 融合领域先验（周期性、频域）→ PatchTST / iTransformer 重构 token 定义 → TFT 侧重可解释性与工程落地。没有普遍最优——选型取决于变量数量、预测时域与是否需要可解释性。
+</div>
+
 
 
 ---
@@ -145,7 +217,7 @@ layout: two-cols
 class: my-auto
 ---
 
-# 绿氢背后的“调度大脑”
+# 案例一：绿氢背后的“调度大脑”
 
 [内蒙古多伦，大唐集团煤化工基地](https://sklict.zju.edu.cn/2025/0724/c85586a3071334/page.htm)
 
@@ -161,7 +233,10 @@ class: my-auto
 
 ::right::
 
-<img src="/img/transformer/大唐多伦化工厂.png" class="h-70 rounded-xl mx-auto mt-10" />
+<img src="/img/transformer/大唐多伦化工厂.png" class="h-70 rounded-xl mx-auto mt-10 ml-8" />
+
+
+<!--这是一则来自 2025-06-30 的新闻 -->
 
 ---
 layout: two-cols
@@ -193,75 +268,85 @@ layout: two-cols
 </v-click>
 
 ---
-layout: two-cols
-class: my-auto
+layout: default
 ---
 
-# 从“一地一模型”到统一大模型
+# 案例二：智能电网能耗预测中的 Temporal Fusion Transformer
 
-[科大讯飞 · 羚羊能源大模型 3.0](https://ah.people.com.cn/n2/2024/1110/c358428-41035972.html)
+<p class="text-slate-500 text-sm mt-0 mb-6">Badhe et al. · <em>Frontiers in Artificial Intelligence</em> 2025, 8:1542320 · CC BY Open Access</p>
 
-<v-clicks depth="2">
+<div class="grid grid-cols-2 gap-10 items-start">
 
-- 痛点：风电场故障模型 → 无法迁移到光伏电站
-- “一地一模型”模式 → 严重制约 AI 规模化落地
-- 思路：基于 Transformer，将时序数据映射到**语义空间**
-- 新场站仅需少量数据微调（few-shot learning），即可快速适配
+<div>
+  <h3 class="text-violet-400 font-semibold text-base mb-3">背景与问题</h3>
+  <p class="text-slate-300 text-sm leading-relaxed mb-5">
+    智能电网中的能耗数据受<strong class="text-white">建筑类型、天气条件、时段负荷</strong>等多重因素交叉影响，呈现出强非线性与跨尺度的时序结构。传统 LSTM 对这类多变量、多时间尺度的依赖关系建模能力有限，预测精度存在明显瓶颈。研究采用来自 UCI Household 数据集的真实家庭用电记录作为实验基准。
+  </p>
+  <h3 class="text-violet-400 font-semibold text-base mb-3">方法</h3>
+  <p class="text-slate-300 text-sm leading-relaxed">
+    以 <strong class="text-white">Temporal Fusion Transformer（TFT）</strong>为核心预测模型——其自注意力机制同时建模短期波动与长期趋势，门控机制过滤无关输入，并保留对各时间步特征重要性的可解释输出。在此之上，引入 <strong class="text-white">Aquila Optimizer（AO）</strong>对学习率、注意力头数等关键超参数进行自动调优，显著加速收敛。
+  </p>
+</div>
 
-</v-clicks>
-
-::right::
-
-<div class="mt-15 ml-10">
-  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5 mb-6">
-    <div class="text-sm text-gray-400 mb-2">传统故障预警准确率</div>
-    <div class="text-5xl font-bold text-red-400">72%</div>
+<div>
+  <div class="rounded-xl overflow-hidden border border-slate-700/60 bg-slate-800/50">
+    <FullscreenImg src="/img/transformer/case2.png" alt="各模型 RMSE 对比" class="w-full object-cover" />
+    <p class="text-slate-500 text-xs px-3 py-2">图：各方法 RMSE 对比（AO-TFT 最低），来源 Fig. "Graph showing RMSE values per methods"，Badhe et al. 2025</p>
   </div>
-  <div class="rounded-xl border border-gray-600/40 p-6 bg-white/5">
-    <div class="text-sm text-gray-400 mb-2">新场站部署周期</div>
-    <div class="text-5xl font-bold text-yellow-400">3 周</div>
+  <p class="text-slate-600 text-xs mt-3 leading-relaxed">
+    与 SVM、ANN、CNN-1D、LSTM、Bi-LSTM、CNN-LSTM 及未调优 TFT 的横向对比，AO-TFT 在所有指标上均取得最优。
+  </p>
+</div>
+
+</div>
+
+<!-- SVM是支持向量机（Support Vector Machine），ANN是人工神经网络（Artificial Neural Network）
+CNN-1D是一维卷积神经网络（1D Convolutional Neural Network），Bi-LSTM 是向长短期记忆网络（Bidirectional LSTM）
+CNN-LSTM — 卷积与长短期记忆的混合网络
+ -->
+
+---
+layout: default
+---
+
+# 案例：结果与意义
+
+<p class="text-slate-500 text-sm mt-0 mb-8">UCI Household 真实用电数据 · 多建筑类型 · 多天气场景验证</p>
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+  <div class="text-center">
+    <div class="text-4xl font-black text-violet-400 mb-1">0.48</div>
+    <div class="text-slate-400 text-sm">RMSE <span class="text-slate-600 text-xs">（AO-TFT）</span></div>
+    <div class="text-slate-600 text-xs mt-1">vs LSTM 的 0.61，降低 21%</div>
+  </div>
+  <div class="text-center">
+    <div class="text-4xl font-black text-violet-400 mb-1">0.31</div>
+    <div class="text-slate-400 text-sm">MAE <span class="text-slate-600 text-xs">（AO-TFT）</span></div>
+    <div class="text-slate-600 text-xs mt-1">vs CNN-LSTM 的 0.34</div>
+  </div>
+  <div class="text-center">
+    <div class="text-4xl font-black text-violet-400 mb-1">最优</div>
+    <div class="text-slate-400 text-sm">全场景鲁棒性</div>
+    <div class="text-slate-600 text-xs mt-1">跨建筑类型 · 跨天气条件均成立</div>
   </div>
 </div>
 
----
-layout: two-cols
-class: my-auto
----
+<div class="border-t border-slate-800 pt-6 grid grid-cols-2 gap-8">
+  <div>
+    <h4 class="text-slate-300 font-semibold text-sm mb-2">Transformer 相较 LSTM 的关键优势</h4>
+    <p class="text-slate-400 text-sm leading-relaxed">
+      LSTM 按时间步顺序处理，难以同时关注远距离依赖；TFT 的自注意力机制可在单次前向传播中捕捉任意时间跨度的模式，对天气突变、节假日效应等结构性跳变的响应更敏锐。同时，注意力权重天然提供了对"哪些时刻最重要"的可解释输出——这对电网运营决策有直接价值。
+    </p>
+  </div>
+  <div>
+    <h4 class="text-slate-300 font-semibold text-sm mb-2">对智慧能源的更广泛意义</h4>
+    <p class="text-slate-400 text-sm leading-relaxed">
+      该案例展示了 Transformer 在能耗预测上的通用潜力：无论是居民、商业还是工业场景，只要存在多变量时序数据，TFT 的多时间尺度建模能力都能带来精度提升。结合超参数自动调优后，模型还具备更快的部署收敛速度，适合资源受限的实际工程环境。
+    </p>
+  </div>
+</div>
 
-## 统一时序基础框架
+<div class="mt-5 text-slate-600 text-xs border-t border-slate-800/60 pt-4">
+  来源：Badhe NB, Neve RP, Yele VP et al. "An optimized system for predicting energy usage in smart grids using temporal fusion transformer and Aquila optimizer." <em>Front. Artif. Intell.</em> 8:1542320 (2025). doi: 10.3389/frai.2025.1542320
+</div>
 
-<v-clicks>
-
-**技术路线**：千亿级数据自监督学习，构建统一时序基础模型
-
-**两大应用场景**：
-- 🔌 **电力交易** — 功率、负荷、电价精准预测
-- 🔧 **设备运维** — 自然语言交互式故障诊断
-
-**自然语言交互**：运维人员可直接提问
-
-> “风机齿轮箱最近一周有无异常？”
-
-模型返回预警信号 + 原因分析 + 维修建议
-
-</v-clicks>
-
-::right::
-
-<v-click>
-
-### 落地成果
-
-| 场景 | 指标 | 效果 |
-|------|------|------|
-| 故障预警 | 准确率 | 72% → **91%** |
-| 模型部署 | 周期 | 3周 → **2天** |
-| 蒙城风电场 | 考核电量 | 减少 **50%+** |
-| 功率预测 | 准确率 | 提升 **5%+** |
-| 负荷预测 | 准确率 | **94.8%** |
-| 故障排查 | 时间 | 缩短 **73%** |
-| 运维效率 | 整体提升 | **30%+** |
-
-依托星火 X1.5 技术底座，连续三年入选工信部”双跨”平台
-
-</v-click>

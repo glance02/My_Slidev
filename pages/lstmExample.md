@@ -88,12 +88,16 @@ layout: center
  
 <div class="flex flex-col gap-3">
   <div class="rounded-xl overflow-hidden border border-slate-700/60 bg-slate-800/50">
-    <img src="./case2_aswan_dispatch.png" alt="Aswan 调度结果对比" class="w-full object-cover" />
+    <img src="/img/lstm/case2.png" alt="Aswan 调度结果对比" class="w-full object-cover" />
     <p class="text-slate-500 text-xs px-3 py-2">图：30 天电网购电量与弃光量改善对比，来源 Fig. 8，Hassan 2025</p>
   </div>
 </div>
  
 </div>
+
+<!-- grid import 是电网购电量的意思。
+
+Krill Herd Algorithm（KHA）是 2012 年由 Gandomi 和 Alavi 提出的一种群体智能优化算法，灵感来自南极磷虾（krill）的群体行为。 -->
  
 ---
 layout: center
