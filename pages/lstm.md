@@ -1,5 +1,6 @@
 ---
 layout: section
+transition: slide-left
 ---
 
 # Part 2
@@ -33,53 +34,50 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 <FullscreenImg src="/img/lstm/RNN.png" class="h-80 m-6 rounded-xl" />
 
 <!--
-如何解决这个问题呢？
+为了解决这个问题，LSTM诞生了
 -->
 
+
 ---
-layout: center
+layout: default
 ---
 
-# LSTM 的直觉解释
+# LSTM直觉解释
 
 LSTM的设计或多或少的借鉴了人类对于自然语言处理的直觉性经验
 
-先阅读一下一个（虚构的）淘宝评论:
-<Fullscreen>
+<div class="grid grid-cols-2 gap-6 mt-7">
 
-**“这个笔记本非常棒，纸很厚，料很足，用笔写起来手感非常舒服，而且没有一股刺鼻的油墨味；更加好的是这个笔记本不但便宜还做工优良，我上次在别家买的笔记本裁纸都裁不好，还会割伤手……”**
+<div class="bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/20 rounded-lg p-6">
+  <div class="flex items-center gap-3 mb-3">
+    <h3 class="text-lg font-bold text-blue-400">① 信息优先级</h3>
+  </div>
+  <p class="text-slate-300 text-sm leading-relaxed">
+    在一个时间序列中，<span class="text-blue-200 font-semibold">不是所有信息都是同等有效的</span>。大多数情况下，存在 <span class="text-blue-200">"关键词"或"关键帧"</span>。
+  </p>
+</div>
 
-</Fullscreen>
+<div class="bg-gradient-to-br from-violet-500/10 to-violet-500/5 border border-violet-500/20 rounded-lg p-6">
+  <div class="flex items-center gap-3 mb-3">
+    <h3 class="text-lg font-bold text-violet-400">② 动态概括</h3>
+  </div>
+  <p class="text-slate-300 text-sm leading-relaxed">
+    我们在从头到尾阅读时<span class="text-violet-200 font-semibold">自动概括</span>已阅内容，<span class="text-violet-200">用之前的理解帮助解析后文</span>——这是一个持续的选择性记忆过程。
+  </p>
+</div>
 
-看完这段话以后马上转述，会得到如下几个关键词：
+</div>
 
-“**纸好**”，“**没味道**”，“**便宜**”和“**做工好**”
-
-<!--
-如果是让我们自己去复述，其过程应该回事什么样子呢？
-
-会先总结出几个关键词，然后重新组织语言
--->
-
----
-layout: center
----
-
-# LSTM直觉解释的特点
-
-- 在一个时间序列中，不是所有信息都是同等有效的，大多数情况存在“关键词”或者“关键帧”
-- 我们会在从头到尾阅读的时候“自动”概括已阅部分的内容并且用之前的内容帮助理解后文
+<br>
 
 基于以上这两点，LSTM的设计者提出了“长短期记忆”的概念：
 
 **只有一部分的信息需要长期的记忆，而有的信息可以不记下来**。
 
-同时，我们还需要一套机制可以动态的处理神经网络的“记忆”，因为有的信息可能一开始价值很高，后面价值逐渐衰减，这时候我们也需要让神经网络学会“遗忘”特定的信息
 
+<!-- 直觉性经验也就是片段概括的流程。人类一般都会先总结出关键词，然后再根据关键词进行重述 -->
 ---
 layout: default
-
-# hide: true
 ---
 
 <div class="aspect-video rounded-xl shadow-2xl overflow-hidden border border-gray-700 mb-100 ">
@@ -221,7 +219,11 @@ layout: default
 <img src="/img/lstm/简洁实现.png" class="w-full rounded-xl shadow-2xl border border-gray-700" />
 
 
-<!-- 使用高级API，我们可以直接实例化`LSTM`模型。高级API封装了前文介绍的所有配置细节。 
+<!-- 
+
+由于我比较懒，没有去排版代码和图片，就直接截了一张图片来展示简洁的实现。
+
+使用高级API，我们可以直接实例化`LSTM`模型。高级API封装了前文介绍的所有配置细节。 
 
 在这里要提到，LSTM只是一个基础模型，在实际工程中我们会在LSTM上面加入许多不同的算法或模型组件来提升性能
 
@@ -230,50 +232,3 @@ layout: default
 ---
 src: ./lstmExample.md
 ---
-
----
-layout: default
-hide: true
----
-
-# LSTM 的局限与改进方向
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### LSTM 的固有局限
-
-**① 顺序计算，无法并行**
-- 必须逐步处理时序，训练慢
-- 长序列（>500步）仍有信息衰减
-
-**② 多变量关系建模较弱**
-- 难以同时捕捉多个传感器/节点之间的空间关联
-
-**③ 超参数敏感**
-- 隐藏层大小、层数、dropout 需要仔细调优
-
-</div>
-
-<div>
-
-### 工程中的改进方案
-
-| 问题 | 解决方案 |
-|------|---------|
-| 遗忘长期依赖 | 加入 **Attention 机制** |
-| 特征提取弱 | 前置 **CNN** 提取局部模式 |
-| 多节点空间关系 | 结合 **图神经网络 (GNN)** |
-| 数据量少 | 使用 **迁移学习** 迁移预训练权重 |
-
-<div class="mt-3 border-l-4 border-orange-400 pl-3 text-sm">
-
-💡 这些改进思路，其实正在指向下一个模型——**Transformer**，它用注意力机制从根本上重构了序列建模的方式。
-
-</div>
-
-</div>
-</div>
-
-<!-- 自然过渡到Transformer：局限性引出下一个方案 -->

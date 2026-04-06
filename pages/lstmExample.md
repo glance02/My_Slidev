@@ -1,5 +1,6 @@
 ---
 layout: center
+transition: fade
 ---
  
 # 案例一：比利时国家电网负荷预测
