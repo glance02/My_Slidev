@@ -18,11 +18,11 @@ transition: slide-right
  
 <div>
   <h3 class="text-sky-400 font-semibold text-base mb-3">背景与问题</h3>
-  <p class="text-slate-300 text-sm leading-relaxed mb-5">
+  <p class="text-sm leading-relaxed mb-5">
     比利时输电运营商 Elia 的电网负荷数据以 <strong class="text-white">15 分钟</strong>为粒度连续采集，全年超过 35,000 个时间点。数据呈现强烈的日内周期、周末效应与季节性漂移，且夹杂高频噪声——传统 ARIMA 在此类非平稳高频序列上误差持续偏高。
   </p>
   <h3 class="text-sky-400 font-semibold text-base mb-3">方法</h3>
-  <p class="text-slate-300 text-sm leading-relaxed">
+  <p class="text-sm leading-relaxed">
     以 LSTM 提取时序中的长短程依赖，再以 XGBoost 对残差进行二次修正，构成 <strong class="text-white">LSTM-XGBoost 混合框架</strong>。LSTM 负责捕捉连续时段内的趋势与波动，XGBoost 聚焦修正 LSTM 难以建模的非线性跳变残差。
   </p>
 </div>
@@ -65,11 +65,11 @@ layout: center
  
 <div>
   <h3 class="text-emerald-400 font-semibold text-base mb-3">背景与问题</h3>
-  <p class="text-slate-300 text-sm leading-relaxed mb-5">
+  <p class="text-sm leading-relaxed mb-5">
     埃及 Aswan 是全球太阳辐照度最高的地区之一，5 kW 光伏阵列接入含氢储能系统的智能微电网。核心挑战是：光伏出力高度随机，而氢储能的充放电调度需要提前预判出力曲线，否则将产生大量弃电或过度依赖电网购电。
   </p>
   <h3 class="text-emerald-400 font-semibold text-base mb-3">方法</h3>
-  <p class="text-slate-300 text-sm leading-relaxed">
+  <p class="text-sm leading-relaxed">
     LSTM 对 15 分钟粒度的光伏出力与负荷数据进行短期预测，预测结果作为 <strong class="text-white">Krill Herd 优化算法（KHA）</strong>的输入，生成每个调度周期的最优充放电策略，每次决策耗时不足 2 秒。
   </p>
 </div>
@@ -123,11 +123,11 @@ hide: true
  
 <div class="border-t border-slate-800 pt-6 grid grid-cols-2 gap-8">
   <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">LSTM 在其中的角色</h4>
+    <h4 class="font-semibold text-sm mb-2">LSTM 在其中的角色</h4>
     <p class="text-slate-400 text-sm leading-relaxed">LSTM 提供的短期预测质量直接决定了优化器的决策上限。当预测 MAPE 从 8% 降至 4.8% 时，弃光减少量几乎同比提升——预测精度与调度收益呈强正相关。</p>
   </div>
   <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">从案例到一般结论</h4>
+    <h4 class="font-semibold text-sm mb-2">从案例到一般结论</h4>
     <p class="text-slate-400 text-sm leading-relaxed">这一"预测驱动调度"的范式具有可移植性：只要存在时序出力数据与可控储能资源，LSTM + 优化算法的组合逻辑即可适配风电、储热等其他场景。</p>
   </div>
 </div>

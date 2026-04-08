@@ -125,7 +125,7 @@ layout: default
 
 # 面向能源时序的 Transformer 变体
 
-<p class="text-slate-400 text-lg mt-1 mb-8">原始 Transformer 直接用于能源预测效果有限——研究者针对时序数据的特点对其进行了系统性改造</p>
+<p class="text-lg mt-1 mb-8">原始 Transformer 直接用于能源预测效果有限——研究者针对时序数据的特点对其进行了系统性改造</p>
 
 <div class="grid grid-cols-2 gap-x-10 gap-y-5">
 
@@ -137,8 +137,8 @@ layout: default
         <span class="text-sky-400 font-bold text-base">Informer</span>
         <span class="text-slate-600 text-xs">Zhou et al., 2021 · AAAI Best Paper</span>
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed">
-        原始 Transformer 的注意力计算复杂度为 O(L²)，序列一长就慢得无法用于实际电网。Informer 引入 <span class="text-slate-200">ProbSparse 稀疏注意力</span>，只保留得分最高的 Top-k 注意力对，将复杂度降至 O(L log L)，使长序列（如一年 15 分钟粒度）的多步预测成为可能。常用于日前至周前的负荷与可再生出力预测。
+      <p class="text-sm leading-relaxed">
+        原始 Transformer 的注意力计算复杂度为 O(L²)，序列一长就慢得无法用于实际电网。Informer 引入 ProbSparse 稀疏注意力，只保留得分最高的 Top-k 注意力对，将复杂度降至 O(L log L)，使长序列（如一年 15 分钟粒度）的多步预测成为可能。常用于日前至周前的负荷与可再生出力预测。
       </p>
     </div>
   </div>
@@ -151,8 +151,8 @@ layout: default
         <span class="text-rose-400 font-bold text-base">TFT</span>
         <span class="text-slate-600 text-xs">Temporal Fusion Transformer · Lim et al., 2021 · IJF</span>
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed">
-        专为工程落地设计：门控机制过滤无关输入，变量选择网络自动识别重要特征，注意力权重提供<span class="text-slate-200">可解释的时间步重要性输出</span>，可直接告知调度员"模型在关注哪个时段"。同时原生支持已知未来协变量（如节假日、计划检修）的输入，在工业能源管理系统（EMS）中已有真实部署案例。
+      <p class="text-sm leading-relaxed">
+        专为工程落地设计：门控机制过滤无关输入，变量选择网络自动识别重要特征，注意力权重提供可解释的时间步重要性输出，可直接告知调度员"模型在关注哪个时段"。同时原生支持已知未来协变量（如节假日、计划检修）的输入，在工业能源管理系统（EMS）中已有真实部署案例。
       </p>
     </div>
   </div>
@@ -165,8 +165,8 @@ layout: default
         <span class="text-amber-400 font-bold text-base">iTransformer</span>
         <span class="text-slate-600 text-xs">Liu et al., 2024 · ICLR</span>
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed">
-        提出"倒置"视角：将每个<span class="text-slate-200">变量（而非时间步）作为 token</span>，注意力机制因此建模的是变量之间的相关性（如温度与负荷、风速与出力之间的耦合），而前馈网络则负责编码各变量自身的时序表示。在引入多气象变量的电网预测中，其精度提升效率比 PatchTST 高出 3 倍。
+      <p class="text-sm leading-relaxed">
+        提出"倒置"视角：将每个变量（而非时间步）作为 token，注意力机制因此建模的是变量之间的相关性（如温度与负荷、风速与出力之间的耦合），而前馈网络则负责编码各变量自身的时序表示。在引入多气象变量的电网预测中，其精度提升效率比 PatchTST 高出 3 倍。
       </p>
     </div>
   </div>
@@ -179,8 +179,8 @@ layout: default
         <span class="text-cyan-400 font-bold text-base">FEDformer</span>
         <span class="text-slate-600 text-xs">Zhou et al., 2022 · ICML</span>
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed">
-        将注意力计算从时域迁移至<span class="text-slate-200">频域（傅里叶变换）</span>，在频率空间中直接识别负荷或出力的主导周期成分，再做稀疏选择。这一设计使模型对能源数据中的周期性噪声天然鲁棒，在单变量预测任务上比 Autoformer 精度提升超过 22%，且计算效率更高。
+      <p class="text-sm leading-relaxed">
+        将注意力计算从时域迁移至频域（傅里叶变换），在频率空间中直接识别负荷或出力的主导周期成分，再做稀疏选择。这一设计使模型对能源数据中的周期性噪声天然鲁棒，在单变量预测任务上比 Autoformer 精度提升超过 22%，且计算效率更高。
       </p>
     </div>
   </div>
@@ -262,25 +262,25 @@ transition: slide-right
 
 # 智能电网能耗预测中的 Temporal Fusion Transformer
 
-<p class="text-slate-500 text-sm mt-0 mb-6">Badhe et al. · <em>Frontiers in Artificial Intelligence</em> 2025, 8:1542320 · CC BY Open Access</p>
+<p class="text-sm mt-0 mb-6">Badhe et al. · <em>Frontiers in Artificial Intelligence</em> 2025, 8:1542320 · CC BY Open Access</p>
 
 <div class="grid grid-cols-2 gap-10 items-start">
 
 <div>
   <h3 class="text-violet-400 font-semibold text-base mb-3">背景与问题</h3>
-  <p class="text-slate-300 text-sm leading-relaxed mb-5">
-    智能电网中的能耗数据受<strong class="text-white">建筑类型、天气条件、时段负荷</strong>等多重因素交叉影响，呈现出强非线性与跨尺度的时序结构。传统 LSTM 对这类多变量、多时间尺度的依赖关系建模能力有限，预测精度存在明显瓶颈。研究采用来自 UCI Household 数据集的真实家庭用电记录作为实验基准。
+  <p class="text-sm leading-relaxed mb-5">
+    智能电网中的能耗数据受建筑类型、天气条件、时段负荷等多重因素交叉影响，呈现出强非线性与跨尺度的时序结构。传统 LSTM 对这类多变量、多时间尺度的依赖关系建模能力有限，预测精度存在明显瓶颈。研究采用来自 UCI Household 数据集的真实家庭用电记录作为实验基准。
   </p>
   <h3 class="text-violet-400 font-semibold text-base mb-3">方法</h3>
-  <p class="text-slate-300 text-sm leading-relaxed">
-    以 <strong class="text-white">Temporal Fusion Transformer（TFT）</strong>为核心预测模型——其自注意力机制同时建模短期波动与长期趋势，门控机制过滤无关输入，并保留对各时间步特征重要性的可解释输出。在此之上，引入 <strong class="text-white">Aquila Optimizer（AO）</strong>对学习率、注意力头数等关键超参数进行自动调优，显著加速收敛。
+  <p class="text-sm leading-relaxed">
+    以 Temporal Fusion Transformer（TFT）为核心预测模型——其自注意力机制同时建模短期波动与长期趋势，门控机制过滤无关输入，并保留对各时间步特征重要性的可解释输出。在此之上，引入 Aquila Optimizer（AO）对学习率、注意力头数等关键超参数进行自动调优，显著加速收敛。
   </p>
 </div>
 
 <div>
   <div class="rounded-xl overflow-hidden border border-slate-700/60 bg-slate-800/50">
     <FullscreenImg src="/img/transformer/case2.png" alt="各模型 RMSE 对比" class="w-full object-cover" />
-    <p class="text-slate-500 text-xs px-3 py-2">图：各方法 RMSE 对比（AO-TFT 最低）</p>
+    <p class="text-xs px-3 py-2">图：各方法 RMSE 对比（AO-TFT 最低）</p>
   </div>
   <p class="text-slate-600 text-xs mt-3 leading-relaxed">
     与 SVM、ANN、CNN-1D、LSTM、Bi-LSTM、CNN-LSTM 及未调优 TFT 的横向对比，AO-TFT 在所有指标上均取得最优。

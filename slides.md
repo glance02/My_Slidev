@@ -1,13 +1,16 @@
 ---
-theme: dracula
+theme: light-icons
 title: 深度学习赋能智慧能源
+layout: center
 info: |
   ## 深度学习与智慧能源
   探索 LSTM 与 Transformer 在智慧能源系统中的应用
 highlighter: shiki
 transition: slide-left
+themeConfig:
+  primary: '#5d8392'
 fonts:
-  sans: SimSun
+  sans: "SimSun"
 ---
 
 # 深度学习赋能智慧能源

@@ -52,7 +52,7 @@ LSTM的设计或多或少的借鉴了人类对于自然语言处理的直觉性�
   <div class="flex items-center gap-3 mb-3">
     <h3 class="text-lg font-bold text-blue-400">① 信息优先级</h3>
   </div>
-  <p class="text-slate-300 text-sm leading-relaxed">
+  <p class="text-sm leading-relaxed">
     在一个时间序列中，<span class="text-blue-200 font-semibold">不是所有信息都是同等有效的</span>。大多数情况下，存在 <span class="text-blue-200">"关键词"或"关键帧"</span>。
   </p>
 </div>
@@ -61,7 +61,7 @@ LSTM的设计或多或少的借鉴了人类对于自然语言处理的直觉性�
   <div class="flex items-center gap-3 mb-3">
     <h3 class="text-lg font-bold text-violet-400">② 动态概括</h3>
   </div>
-  <p class="text-slate-300 text-sm leading-relaxed">
+  <p class="text-sm leading-relaxed">
     我们在从头到尾阅读时<span class="text-violet-200 font-semibold">自动概括</span>已阅内容，<span class="text-violet-200">用之前的理解帮助解析后文</span>——这是一个持续的选择性记忆过程。
   </p>
 </div>
