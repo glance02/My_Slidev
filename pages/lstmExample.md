@@ -1,9 +1,16 @@
 ---
+layout: section
+transition: slide-left
+---
+
+# LSTM 案例一
+
+---
 layout: center
-transition: fade
+transition: slide-right
 ---
  
-# 案例一：比利时国家电网负荷预测
+# 比利时国家电网负荷预测
  
 <p class="text-slate-500 text-sm mt-0 mb-6">Dakheel & Çevik · <em>Energies</em> 2025, 18(11), 2842 · MDPI Open Access</p>
  
@@ -32,45 +39,25 @@ transition: fade
 ---
 layout: center
 ---
- 
-# 案例一：结果与意义
- 
-<p class="text-slate-500 text-sm mt-0 mb-8">比利时 Elia 电网 · 2022 全年 15 分钟分辨率数据</p>
- 
-<div class="grid grid-cols-3 gap-6 mb-8">
-  <div class="text-center">
-    <div class="text-4xl font-black text-sky-400 mb-1">1.18<span class="text-2xl">%</span></div>
-    <div class="text-slate-400 text-sm">MAPE</div>
-    <div class="text-slate-600 text-xs mt-1">平均绝对百分比误差</div>
-  </div>
-  <div class="text-center">
-    <div class="text-4xl font-black text-sky-400 mb-1">106.5<span class="text-xl">MW</span></div>
-    <div class="text-slate-400 text-sm">RMSE</div>
-    <div class="text-slate-600 text-xs mt-1">均方根误差</div>
-  </div>
-  <div class="text-center">
-    <div class="text-4xl font-black text-sky-400 mb-1">0.994</div>
-    <div class="text-slate-400 text-sm">R²</div>
-    <div class="text-slate-600 text-xs mt-1">决定系数，趋近 1</div>
-  </div>
-</div>
- 
-<div class="border-t border-slate-800 pt-6 grid grid-cols-2 gap-8">
-  <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">对比单模型的提升</h4>
-    <p class="text-slate-400 text-sm leading-relaxed">混合框架在所有指标上均优于单独的 LSTM 或 XGBoost。LSTM 单独使用时 MAPE 约 2.1%，混合后降至 1.18%，误差减少近半——体现了两者互补的价值。</p>
-  </div>
-  <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">对电网运营的意义</h4>
-    <p class="text-slate-400 text-sm leading-relaxed">在国家级电网规模下，1% 的 MAPE 对应数十 MW 的预测精度，直接影响备用容量配置与可再生能源消纳能力，是调度决策的关键输入。</p>
-  </div>
-</div>
- 
+
+<img src="/img/lstm/case1_res.png" alt="残差对比" class="w-full rounded-xl border" />
+
+<!-- 
+截了一张论文的结果图，里面的数字部分是其他论文的结果，可以看出来lstm+XGBoost的结果明显优于其他方法。当然，要是不优于这篇论文也没法发出来
+-->
+
+---
+layout: section
+transition: slide-left
+---
+
+# LSTM 案例二
+
 ---
 layout: center
 ---
  
-# 案例二：埃及 Aswan 光伏微电网氢储能调度
+# 埃及 Aswan 光伏微电网氢储能调度
  
 <p class="text-slate-500 text-sm mt-0 mb-6">Hassan · <em>Scientific Reports</em> 2025, vol. 15, Art. 40394 · Nature Open Access</p>
  
@@ -96,12 +83,15 @@ layout: center
  
 </div>
 
-<!-- grid import 是电网购电量的意思。
+<!-- 
+grid import 是电网购电量的意思。
 
-Krill Herd Algorithm（KHA）是 2012 年由 Gandomi 和 Alavi 提出的一种群体智能优化算法，灵感来自南极磷虾（krill）的群体行为。 -->
+Krill Herd Algorithm（KHA）是 2012 年由 Gandomi 和 Alavi 提出的一种群体智能优化算法，灵感来自南极磷虾（krill）的群体行为。 
+-->
  
 ---
 layout: center
+hide: true
 ---
  
 # 案例二：结果与意义

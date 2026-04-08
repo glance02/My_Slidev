@@ -4,7 +4,7 @@ transition: slide-left
 ---
 
 # Part 1
-## 为什么需要智慧能源？
+## 深度学习与智慧能源
 
 <!-- 从一个现实问题引入：电力是怎么"用不好"的？ -->
 
@@ -13,27 +13,25 @@ transition: slide-left
 layout: default
 ---
 
-# 能源系统正面临前所未有的挑战
+<div class="h-full flex flex-col justify-center">
 
-<img src="/img/Intro/pic1.png" class="h-80 float-right mt-6 rounded-xl" />
+# 能源系统正面临的一些挑战
 
-### 三个核心矛盾
+<div class="mx-auto mt-6 flex w-fit items-start gap-10">
+  <div class="max-w-2xl">
 
-<v-clicks depth="1">
 
-1. **可再生能源的间歇性**
-   - 风能、光伏出力随天气剧烈波动
-   - 2023年全球弃风弃光损失超过 **150 TWh**
+  1. **可再生能源波动性**：<br>&emsp;风电、光伏受天气影响，出力间歇性强、随机性大
+  2. **供需实时平衡**：<br>&emsp;源荷双侧不确定性加剧，电网稳定性受威胁
+  3. **多源异构数据**：<br>&emsp;物联网设备激增，数据协议不统一、质量参差不齐	
+  4. **系统复杂性**：<br>&emsp;分布式能源、储能、负荷多元互动，耦合关系复杂
+  5. **预测精度需求**：<br>&emsp;新能源预测误差直接影响电网安全与经济性
 
-2. **需求侧日趋复杂**
-   - 电动汽车充电、数据中心用电急增
-   - 用电峰谷差不断扩大
+  </div>
 
-3. **实时决策窗口极短**
-   - 电网频率偏差须在秒级内响应
-   - 调度系统需同时处理海量传感器数据
-
-</v-clicks>
+  <img src="/img/Intro/pic1.png" class="h-80 rounded-xl" />
+</div>
+</div>
 
 <!-- 强调：不是为了用深度学习而用，而是问题本身驱动了技术选择 -->
 
@@ -51,7 +49,7 @@ layout: center
     <div>
       <h3 class="font-bold text-base mb-2">线性假设</h3>
       <p class="text-sm leading-relaxed">
-        ARIMA、回归模型以线性关系为根本前提。但负荷突变、可再生出力波动的本质是非线性过程——温度多升一度、云层多遮一秒，影响都不是线性叠加的。假设错了，精度的上限就已经注定。
+        ARIMA、回归模型以线性关系为根本前提。但负荷突变、可再生出力波动的本质是非线性过程——温度多升一度、云层多遮一秒，影响都不是线性叠加的。
       </p>
     </div>
   </div>
@@ -71,7 +69,7 @@ layout: center
     <div>
       <h3 class="font-bold text-base mb-2">时序建模</h3>
       <p class="text-sm leading-relaxed">
-        SVM、随机森林将每个时间点当作独立样本处理，时序中的日周期、周周期、跨季节依赖完全无从捕捉。没有记忆，就没有对"过去"的感知，预测自然失准。
+        SVM、随机森林将每个时间点当作独立样本处理，时序中的日周期、周周期、跨季节依赖完全无从捕捉。没有记忆，就没有对"过去"的感知。
       </p>
     </div>
   </div>
@@ -95,13 +93,10 @@ SVM ， Support Vector Machine（支持向量机），是一种经典的机器�
 -->
 
 ---
-layout: default
+layout: center
 ---
 
 # 深度学习的优势
- 
-<p class=" text-lg mt-1 mb-10">从感知数据，到理解时序，到驱动决策——形成完整的智能闭环</p>
-
 
 <div class="relative mt-18">
  
@@ -114,11 +109,11 @@ layout: default
   <div class="pr-10">
     <div class="flex items-center gap-3 mb-4">
       <div class="w-4 h-4 rounded-full bg-sky-500 shrink-0 ring-4 ring-sky-500/20"></div>
-      <span class="text-sky-400 text-xs tracking-widest uppercase font-semibold">感知 · 建模</span>
+      <span class="text-sky-400 text-xs tracking-widest uppercase font-semibold">非线性</span>
     </div>
-    <h3 class="text-white font-bold text-lg mb-2">捕捉时序规律</h3>
+    <h3 class="text-white font-bold text-lg mb-2">处理非线性关系</h3>
     <p class="text-sm leading-relaxed">
-      能源数据天然是时间序列——负荷有日周期、周周期，也有难以预判的突变。深度学习能从原始数据中自动提取这些模式，无需人工设计特征，也无需对数据做线性假设。
+      深度学习模型在处理高维数据集时，能够自动提取有意义的特征，这使得它们比传统机器学习技术更适合可再生能源预测
     </p>
   </div>
  
@@ -126,11 +121,11 @@ layout: default
   <div class="px-10 border-x border-slate-700/60">
     <div class="flex items-center gap-3 mb-4">
       <div class="w-4 h-4 rounded-full bg-violet-500 shrink-0 ring-4 ring-violet-500/20"></div>
-      <span class="text-violet-400 text-xs tracking-widest uppercase font-semibold">预测 · 推断</span>
+      <span class="text-violet-400 text-xs tracking-widest uppercase font-semibold">动态优化</span>
     </div>
-    <h3 class="text-white font-bold text-lg mb-2">量化不确定性</h3>
+    <h3 class="text-white font-bold text-lg mb-2">实时自适应</h3>
     <p class=" text-sm leading-relaxed">
-      智慧能源的预测不能只给一个点估计——调度需要知道<span class="">误差有多大、极端情景有多可能</span>。深度学习可以输出概率分布与区间预测，让不确定性本身成为决策的输入。
+      深度学习框架能够实时处理物联网传感器数据、动态调整能源分配策略等
     </p>
   </div>
  
@@ -138,11 +133,11 @@ layout: default
   <div class="pl-10">
     <div class="flex items-center gap-3 mb-4">
       <div class="w-4 h-4 rounded-full bg-emerald-500 shrink-0 ring-4 ring-emerald-500/20"></div>
-      <span class="text-emerald-400 text-xs tracking-widest uppercase font-semibold">优化 · 决策</span>
+      <span class="text-emerald-400 text-xs tracking-widest uppercase font-semibold">时序</span>
     </div>
-    <h3 class="text-white font-bold text-lg mb-2">驱动实时决策</h3>
+    <h3 class="text-white font-bold text-lg mb-2">捕捉时序规律</h3>
     <p class=" text-sm leading-relaxed">
-      预测的终点是决策。深度学习可以将预测结果与调度目标直接耦合，在<span class="">储能管理、需求响应、故障检测</span>等场景中替代静态规则，实现自适应的实时控制。
+      能源数据天然是时间序列，深度学习能从原始数据中自动提取这些模式，无需人工设计特征，也无需对数据做线性假设
     </p>
   </div>
  
@@ -150,7 +145,11 @@ layout: default
 </div>
  
 <div class="mt-10  text-sm border-t border-slate-800 pt-5">
-  三个层次并非孤立模块——特征学习的质量决定预测上限，预测的不确定性直接塑造决策策略，构成<span class="">数据→预测→决策</span>的端到端智能链路。
+  从非线性建模，到实时自适应，再到时序规律捕捉，深度学习为智慧能源提供了一条从数据理解到决策优化的完整路径
 </div>
 
-<!-- 我们接下来主要介绍两个基础模型 -->
+<!-- 
+依次对应前面提出的三个传统方法的问题
+
+我们接下来主要介绍两个基础模型 
+-->

@@ -35,7 +35,7 @@ layout: two-cols
 <div class="mt-4 h-[360px] flex flex-col gap-4">
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5 mr">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 01</div>
-    <div class="font-semibold">为什么需要智慧能源？</div>
+    <div class="font-semibold">深度学习与智慧能源</div>
     <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
       <li>能源挑战背景</li>
       <li>传统方法的乏力</li>
@@ -71,7 +71,7 @@ layout: two-cols
 
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 04</div>
-    <div class="font-semibold">总结与展望</div>
+    <div class="font-semibold">总结</div>
     <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
       <li>两种模型互补共存</li>
       <li>持续进化方向与未来趋势</li>

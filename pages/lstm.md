@@ -39,7 +39,7 @@ $$h_t = \tanh(W_h h_{t-1} + W_x x_t + b)$$
 
 
 ---
-layout: default
+layout: center
 ---
 
 # LSTM直觉解释
@@ -163,7 +163,7 @@ layout: two-cols
 class: my-auto
 ---
 
-# lstm的代码实现
+# LSTM的代码实现
 
 **① 遗忘门** $\mathbf{F}_t$：决定丢弃什么旧记忆
 
@@ -210,8 +210,11 @@ def lstm(inputs, state, params):
     return torch.cat(outputs, dim=0), (H, C)
 ```
 
+<!-- lstm是一个比较简单的模型，在与能源领域结合的时候，往往是作为基础组件使用，和不同的模块或方法进行组合 -->
+
 ---
 layout: default
+hide: true
 ---
 
 # LSTM的简洁实现

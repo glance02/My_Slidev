@@ -191,18 +191,18 @@ layout: default
 layout: section
 ---
 
-# Transformer 案例
+# Transformer 案例一
 
 ---
 layout: two-cols
 class: my-auto
 ---
 
-# 案例一：绿氢背后的“调度大脑”
+# 绿氢背后的“调度大脑”
 
 [内蒙古多伦，大唐集团煤化工基地](https://sklict.zju.edu.cn/2025/0724/c85586a3071334/page.htm)
 
-<v-clicks depth="2">
+<v-clicks depth="1">
 
 - 传统：煤制氢，碳排放强度高
 - 优势：周边光、风资源丰富 → **绿电制绿氢**
@@ -221,13 +221,14 @@ class: my-auto
 
 ---
 layout: two-cols
+class: my-auto
 ---
 
 <img src="/img/transformer/大唐中控技术.png" class="h-110 rounded-xl mt-5" />
 
 ::right::
 
-## Transformer多能源协同优化模型
+## 时间序列大模型TPT
 
 <v-clicks>
 
@@ -249,10 +250,17 @@ layout: two-cols
 </v-click>
 
 ---
-layout: default
+layout: section
 ---
 
-# 案例二：智能电网能耗预测中的 Temporal Fusion Transformer
+# Transformer 案例二
+
+---
+layout: center
+transition: slide-right
+---
+
+# 智能电网能耗预测中的 Temporal Fusion Transformer
 
 <p class="text-slate-500 text-sm mt-0 mb-6">Badhe et al. · <em>Frontiers in Artificial Intelligence</em> 2025, 8:1542320 · CC BY Open Access</p>
 
@@ -272,7 +280,7 @@ layout: default
 <div>
   <div class="rounded-xl overflow-hidden border border-slate-700/60 bg-slate-800/50">
     <FullscreenImg src="/img/transformer/case2.png" alt="各模型 RMSE 对比" class="w-full object-cover" />
-    <p class="text-slate-500 text-xs px-3 py-2">图：各方法 RMSE 对比（AO-TFT 最低），来源 Fig. "Graph showing RMSE values per methods"，Badhe et al. 2025</p>
+    <p class="text-slate-500 text-xs px-3 py-2">图：各方法 RMSE 对比（AO-TFT 最低）</p>
   </div>
   <p class="text-slate-600 text-xs mt-3 leading-relaxed">
     与 SVM、ANN、CNN-1D、LSTM、Bi-LSTM、CNN-LSTM 及未调优 TFT 的横向对比，AO-TFT 在所有指标上均取得最优。
@@ -287,47 +295,15 @@ CNN-LSTM — 卷积与长短期记忆的混合网络
  -->
 
 ---
-layout: default
+layout: center
 ---
 
-# 案例：结果与意义
+## TABLE: Comparison of different methods based on MAE and RMSE (with 95% confidence intervals).
 
-<p class="text-slate-500 text-sm mt-0 mb-8">UCI Household 真实用电数据 · 多建筑类型 · 多天气场景验证</p>
+<img src="\img\transformer\case2_res.png" class="w-full rounded-xl border">
 
-<div class="grid grid-cols-3 gap-6 mb-8">
-  <div class="text-center">
-    <div class="text-4xl font-black text-violet-400 mb-1">0.48</div>
-    <div class="text-slate-400 text-sm">RMSE <span class="text-slate-600 text-xs">（AO-TFT）</span></div>
-    <div class="text-slate-600 text-xs mt-1">vs LSTM 的 0.61，降低 21%</div>
-  </div>
-  <div class="text-center">
-    <div class="text-4xl font-black text-violet-400 mb-1">0.31</div>
-    <div class="text-slate-400 text-sm">MAE <span class="text-slate-600 text-xs">（AO-TFT）</span></div>
-    <div class="text-slate-600 text-xs mt-1">vs CNN-LSTM 的 0.34</div>
-  </div>
-  <div class="text-center">
-    <div class="text-4xl font-black text-violet-400 mb-1">最优</div>
-    <div class="text-slate-400 text-sm">全场景鲁棒性</div>
-    <div class="text-slate-600 text-xs mt-1">跨建筑类型 · 跨天气条件均成立</div>
-  </div>
-</div>
+<!-- 
+confidence intervals 是置信度的意思
 
-<div class="border-t border-slate-800 pt-6 grid grid-cols-2 gap-8">
-  <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">Transformer 相较 LSTM 的关键优势</h4>
-    <p class="text-slate-400 text-sm leading-relaxed">
-      LSTM 按时间步顺序处理，难以同时关注远距离依赖；TFT 的自注意力机制可在单次前向传播中捕捉任意时间跨度的模式，对天气突变、节假日效应等结构性跳变的响应更敏锐。同时，注意力权重天然提供了对"哪些时刻最重要"的可解释输出——这对电网运营决策有直接价值。
-    </p>
-  </div>
-  <div>
-    <h4 class="text-slate-300 font-semibold text-sm mb-2">对智慧能源的更广泛意义</h4>
-    <p class="text-slate-400 text-sm leading-relaxed">
-      该案例展示了 Transformer 在能耗预测上的通用潜力：无论是居民、商业还是工业场景，只要存在多变量时序数据，TFT 的多时间尺度建模能力都能带来精度提升。结合超参数自动调优后，模型还具备更快的部署收敛速度，适合资源受限的实际工程环境。
-    </p>
-  </div>
-</div>
-
-<div class="mt-5 text-slate-600 text-xs border-t border-slate-800/60 pt-4">
-  来源：Badhe NB, Neve RP, Yele VP et al. "An optimized system for predicting energy usage in smart grids using temporal fusion transformer and Aquila optimizer." <em>Front. Artif. Intell.</em> 8:1542320 (2025). doi: 10.3389/frai.2025.1542320
-</div>
-
+这张图和之前的那张图的结果其实差不多，这个列表把RMSE和MAE两个参数都列出来了
+ -->
