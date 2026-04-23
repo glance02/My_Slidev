@@ -20,6 +20,12 @@ importers:
       '@slidev/theme-seriph':
         specifier: latest
         version: 0.25.0
+      slidev-theme-catppuccin-latte:
+        specifier: ^0.1.0
+        version: 0.1.0
+      slidev-theme-catppuccin-mocha:
+        specifier: ^0.1.0
+        version: 0.1.0
       slidev-theme-dracula:
         specifier: ^0.2.0
         version: 0.2.0
@@ -4550,6 +4556,14 @@ packages:
   slash@4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
+
+  slidev-theme-catppuccin-latte@0.1.0:
+    resolution: {integrity: sha512-CCdlEDNFYr3WHFyINNsFlM0jDm6LauNE4um1S0WguzylgZgDSInGtvIwxyAE7i/I5dtZS7qobzD10U2PJdQjTA==}
+    engines: {node: '>=14.0.0', slidev: '>=0.19.3'}
+
+  slidev-theme-catppuccin-mocha@0.1.0:
+    resolution: {integrity: sha512-Fdj6G++QsiI5cITbZveEHnYqaR46xY8H9G1t3k8BvSzbrGmPDvdUsGp5RbvLhQlcQ6RCHROuIlintMxDCQPqsg==}
+    engines: {node: '>=14.0.0', slidev: '>=0.19.3'}
 
   slidev-theme-dracula@0.2.0:
     resolution: {integrity: sha512-ndMD27+gUNYt9aXrb4/0vSBHKP007mpD2eCJppzhqXDG1DmN0Q6I6iFz+QvIjOPDKzzPjoYZbsWp6lPLJjgs9g==}
@@ -10739,6 +10753,16 @@ snapshots:
   sisteransi@1.0.5: {}
 
   slash@4.0.0: {}
+
+  slidev-theme-catppuccin-latte@0.1.0:
+    dependencies:
+      codemirror-theme-vars: 0.1.2
+      prism-theme-vars: 0.2.5
+
+  slidev-theme-catppuccin-mocha@0.1.0:
+    dependencies:
+      codemirror-theme-vars: 0.1.2
+      prism-theme-vars: 0.2.5
 
   slidev-theme-dracula@0.2.0:
     dependencies:

@@ -12,6 +12,8 @@
     "@slidev/theme-apple-basic": "^0.25.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
+    "slidev-theme-catppuccin-latte": "^0.1.0",
+    "slidev-theme-catppuccin-mocha": "^0.1.0",
     "slidev-theme-dracula": "^0.2.0",
     "slidev-theme-light-icons": "^1.0.2",
     "slidev-theme-penguin": "^2.3.1",

@@ -1,0 +1,196 @@
+---
+name: animations
+description: 点击动画、运动效果和幻灯片过渡
+---
+
+# 动画
+
+点击动画、运动效果和幻灯片过渡。
+
+## 点击动画
+
+### v-click 指令
+
+```md
+<div v-click>点击时出现</div>
+<div v-click>下一次点击时出现</div>
+```
+
+### v-clicks 组件
+
+为列表项添加动画：
+
+```md
+<v-clicks>
+
+- 项目 1
+- 项目 2
+- 项目 3
+
+</v-clicks>
+```
+
+对嵌套列表可以设置深度：
+
+```md
+<v-clicks depth="2">
+
+- 父项 1
+  - 子项 1
+  - 子项 2
+- 父项 2
+
+</v-clicks>
+```
+
+### 点击位置控制
+
+相对定位：
+```md
+<div v-click>第 1 次（默认）</div>
+<div v-click="+1">第 2 次</div>
+<div v-click="-1">与前一个相同</div>
+```
+
+绝对定位：
+```md
+<div v-click="3">在第 3 次点击时出现</div>
+<div v-click="[2,5]">在第 2 到第 5 次点击之间可见</div>
+```
+
+### v-after
+
+与前一个元素同时显示：
+
+```md
+<div v-click>主元素</div>
+<div v-after>与主元素一起出现</div>
+```
+
+### v-switch
+
+按点击次数做条件渲染：
+
+```md
+<v-switch>
+  <template #1>第一种状态</template>
+  <template #2>第二种状态</template>
+  <template #3>第三种状态</template>
+</v-switch>
+```
+
+## 自定义点击次数
+
+```md
+---
+clicks: 10
+---
+```
+
+或者从指定点击数开始：
+
+```md
+---
+clicksStart: 5
+---
+```
+
+## Motion 动画
+
+使用 `@vueuse/motion`：
+
+```md
+<div
+  v-motion
+  :initial="{ x: -100, opacity: 0 }"
+  :enter="{ x: 0, opacity: 1 }"
+>
+  带动画的内容
+</div>
+```
+
+基于点击的运动动画：
+
+```md
+<div
+  v-motion
+  :initial="{ scale: 1 }"
+  :click-1="{ scale: 1.5 }"
+  :click-2="{ scale: 1 }"
+>
+  点击时缩放
+</div>
+```
+
+## 幻灯片过渡
+
+在 headmatter 中配置（作用于所有幻灯片）：
+
+```md
+---
+transition: slide-left
+---
+```
+
+按单页配置：
+
+```md
+---
+transition: fade
+---
+```
+
+### 内置过渡
+
+- `fade` / `fade-out`
+- `slide-left` / `slide-right`
+- `slide-up` / `slide-down`
+- `view-transition`（View Transitions API）
+
+### 方向感知过渡
+
+为前进 / 后退设置不同过渡：
+
+```md
+---
+transition: slide-left | slide-right
+---
+```
+
+### 自定义过渡
+
+定义 CSS 类：
+
+```css
+.my-transition-enter-active,
+.my-transition-leave-active {
+  transition: all 0.5s ease;
+}
+.my-transition-enter-from,
+.my-transition-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
+}
+```
+
+使用方式：`transition: my-transition`
+
+## CSS 类
+
+动画目标元素会带上这些类：
+- `.slidev-vclick-target` - 带动画的元素
+- `.slidev-vclick-hidden` - 隐藏状态
+- `.slidev-vclick-current` - 当前点击目标
+- `.slidev-vclick-prior` - 已经显示过的目标
+
+## 默认动画 CSS
+
+```css
+.slidev-vclick-target {
+  transition: opacity 100ms ease;
+}
+.slidev-vclick-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+```

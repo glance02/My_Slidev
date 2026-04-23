@@ -1,5 +1,5 @@
 ---
-theme: light-icons
+theme: apple-basic
 title: 深度学习赋能智慧能源
 layout: center
 info: |
@@ -7,8 +7,7 @@ info: |
   探索 LSTM 与 Transformer 在智慧能源系统中的应用
 highlighter: shiki
 transition: slide-left
-themeConfig:
-  primary: '#5d8392'
+comark: true
 fonts:
   sans: "SimSun"
 ---
@@ -39,7 +38,7 @@ layout: two-cols
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5 mr">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 01</div>
     <div class="font-semibold">深度学习与智慧能源</div>
-    <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
+    <ul class="mt-2 text-sm  list-disc pl-5 space-y-1">
       <li>能源挑战背景</li>
       <li>传统方法的乏力</li>
       <li>深度学习的优势</li>
@@ -49,7 +48,7 @@ layout: two-cols
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5 mr">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 02</div>
     <div class="font-semibold">LSTM 与智慧能源</div>
-    <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
+    <ul class="mt-2 text-sm  list-disc pl-5 space-y-1">
       <li>LSTM 原理与实现</li>
       <li>电网负荷预测案例</li>
       <li>光伏微电网调度案例</li>
@@ -65,7 +64,7 @@ layout: two-cols
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 03</div>
     <div class="font-semibold">Transformer 与智慧能源</div>
-    <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
+    <ul class="mt-2 text-sm  list-disc pl-5 space-y-1">
       <li>自注意力机制与变体</li>
       <li>绿氢协同优化案例</li>
       <li>智能电网能耗预测案例</li>
@@ -75,7 +74,7 @@ layout: two-cols
   <div class="flex-1 rounded-lg border border-gray-600/40 p-4 bg-white/5">
     <div class="text-xs tracking-wider uppercase text-gray-400 mb-1">Part 04</div>
     <div class="font-semibold">总结</div>
-    <ul class="mt-2 text-sm text-gray-300 list-disc pl-5 space-y-1">
+    <ul class="mt-2 text-sm  list-disc pl-5 space-y-1">
       <li>两种模型互补共存</li>
       <li>持续进化方向与未来趋势</li>
     </ul>
