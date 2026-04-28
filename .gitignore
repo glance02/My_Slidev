@@ -5,3 +5,10 @@ dist
 .vite-inspect
 .remote-assets
 components.d.ts
+
+# IDE
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
