@@ -7,7 +7,8 @@ Start this file from the mamba environment you want Slidev to use:
     python tools/slidev_python_runner.py
 
 The server intentionally binds to 127.0.0.1 only. It executes trusted local
-code sent by your Slidev browser tab.
+code sent by your Slidev browser tab. If the slides are exposed through frp,
+let the Slidev dev server proxy /python-runner/run to this local runner.
 """
 
 from __future__ import annotations

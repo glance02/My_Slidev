@@ -10,7 +10,7 @@ type PythonRunnerResponse = {
   error?: string
 }
 
-const DEFAULT_ENDPOINT = 'http://127.0.0.1:8765/run'
+const DEFAULT_ENDPOINT = '/python-runner/run'
 const DEFAULT_TIMEOUT_SECONDS = 10
 
 function optionString(value: unknown, fallback: string): string {
@@ -89,7 +89,7 @@ export default defineCodeRunnersSetup(() => {
     }
     catch (error) {
       return {
-        error: `Cannot reach the local Python runner at ${endpoint}. Start it with: python tools/slidev_python_runner.py`,
+        error: `Cannot reach the Python runner through ${endpoint}. Start it with: python tools/slidev_python_runner.py`,
       }
     }
   }

@@ -15,6 +15,7 @@
 - 正文内容可以放在 HTML 布局容器内部，但内容本身仍尽量保持 Markdown 写法。
 - 如遇到 Markdown 在 HTML 容器内解析不稳定，或 Markdown 无法表达的局部结构，再使用 HTML 作为兜底。
 - 尽量减少 opacity-80 等让字体变淡的样式，保持内容清晰可读。
+- leading 和 line-height 也尽量不使用。
 
 ## HTML/Tailwind 使用边界
 
