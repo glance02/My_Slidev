@@ -14,12 +14,13 @@
 - 加粗使用 `**...**`，列表、引用、链接等内容表达也优先使用 Markdown 自带语法。
 - 正文内容可以放在 HTML 布局容器内部，但内容本身仍尽量保持 Markdown 写法。
 - 如遇到 Markdown 在 HTML 容器内解析不稳定，或 Markdown 无法表达的局部结构，再使用 HTML 作为兜底。
+- 尽量减少 opacity-80 等让字体变淡的样式，保持内容清晰可读。
 
 ## HTML/Tailwind 使用边界
 
 - 两栏布局、grid/flex、对齐、间距、字号、色块、图注容器等版式控制继续使用 `<div class="...">` 等 HTML/Tailwind 写法。
 - 图片继续使用 `<img src="..." class="...">`，方便控制 `max-h-*`、`max-w-full`、`object-contain`、`rounded`、`shadow` 等展示样式。
-- 常用左右两栏 grid 布局，一侧放 Markdown 正文，一侧放 HTML 图片或简洁示意图。
+- 常用布局包括左右两栏、上文下图、大图主导、三卡片并列、时间线、重点结论居中等；正文仍优先使用 Markdown，布局、图片和视觉控制使用 HTML/Tailwind。
 - 复杂概念优先用少量图形、网格、圆形、箭头等内联 HTML/Tailwind 元素表达，不强行改成 Markdown。
 - 不要把布局容器和图片控制改成 `::div`、Markdown 图片属性或其他 MDC/Comark 写法，除非用户明确要求。
 

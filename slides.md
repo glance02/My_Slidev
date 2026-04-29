@@ -1,9 +1,12 @@
 ---
-theme: default
+theme: frankfurt
 title: 量子纠错的工程化拐点
+date: 2026/04/30
+infoLine: true
+author: 雷显秋、丁兆言、唐若恒
 highlighter: shiki
 transition: slide-left
-layout: center
+layout: cover
 mdc: true
 fonts:
   sans: SimSun
@@ -13,8 +16,168 @@ fonts:
 
 ## 从物理量子比特到逻辑量子比特
 
+<div class="mt-8 text-base leading-7">
+<div><span class="font-700">PPT 演讲：</span>雷显秋</div>
+<div><span class="font-700">信息收集：</span>丁兆言、唐若恒</div>
+</div>
+
 <!--
 开场说明：这次展示关注量子纠错为什么成为近三年量子计算工程化的核心问题。
+-->
+
+---
+layout: center
+section: 从 grover 讲起
+---
+
+# 从 Grover 讲起
+
+<!--
+这一页只做章节标题，提示接下来先用一个最小 Grover 算法引入。
+-->
+
+---
+layout: default
+---
+
+# 问题描述：从 4 个候选态中找到 |11>
+
+<div class="grid grid-cols-[0.95fr_1.05fr] gap-8 items-center">
+<div class="text-lg leading-8">
+
+Grover 搜索要解决的问题可以先压缩成一个很小的版本：在 4 个候选态中，找出被 oracle 标记的目标态。
+
+1. 先用 Hadamard 门准备均匀叠加态，让 4 个候选态同时参与计算。
+2. oracle 不直接告诉我们答案，而是给目标态 `|11>` 加上相位标记。
+3. 振幅放大把目标态的测量概率推高，最后通过多次测量读出答案。
+
+这个小例子先展示量子算法的潜力；后面再讨论为什么当线路变长时，必须依赖量子纠错保证它可靠运行。
+
+</div>
+
+<div class="grid grid-cols-2 gap-4 text-center text-xl font-700">
+<div class="rounded border border-gray-300 py-6">|00&gt;</div>
+<div class="rounded border border-gray-300 py-6">|01&gt;</div>
+<div class="rounded border border-gray-300 py-6">|10&gt;</div>
+<div class="rounded border-2 border-blue-500 bg-blue-50 py-6 text-blue-700">
+<div>|11&gt;</div>
+<div class="mt-2 text-sm font-400">oracle 标记</div>
+</div>
+</div>
+</div>
+
+<!--
+这一页讲清演示问题：四个候选态中只有 |11> 被 oracle 标记，Grover 通过振幅放大提高它的测量概率，并自然引出长线路可靠性问题。
+-->
+
+---
+layout: default
+---
+
+# 代码拆解
+
+````md magic-move {lines: true}
+```python
+# 导入线路构造、编译工具和 Aer 模拟器
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+
+# 设置测量次数，并创建 2 个量子比特、2 个经典比特的线路
+shots = 1024
+qc = QuantumCircuit(2, 2)
+```
+
+```python
+# 模块 1：准备均匀叠加态
+# 让 |00>、|01>、|10>、|11> 同时参与搜索
+qc.h([0, 1])
+
+# 模块 2：oracle 标记目标态 |11>
+# CZ 门会给 |11> 加上负相位，但不直接测量答案
+qc.cz(0, 1)
+# 模块 3：振幅放大
+# 通过反射操作提高被标记状态的测量概率
+qc.h([0, 1])
+qc.z([0, 1])
+qc.cz(0, 1)
+qc.h([0, 1])
+```
+
+```python
+# 模块 4：测量并交给 AerSimulator 运行
+# counts 会统计 1024 次测量中每个结果出现了多少次
+qc.measure([0, 1], [0, 1])
+
+backend = AerSimulator()
+compiled = transpile(qc, backend)
+counts = backend.run(compiled, shots=shots).result().get_counts()
+
+# 模块 5：打印线路和测量结果
+# 最常出现的比特串就是 Grover 搜索给出的答案
+print(qc.draw(output="text"))
+print(counts)
+
+winner = max(counts, key=counts.get)
+print(f"Most frequent state: |{winner}> ({counts[winner]}/{shots})")
+```
+````
+
+<!--
+这一页用 Magic Move 拆解代码模块：导入与建线路、准备叠加态、oracle 标记、振幅放大、测量运行和打印结果。
+-->
+
+---
+layout: default
+class: overflow-auto
+---
+
+# 2 比特 Grover 搜索
+
+```python {monaco-run} {autorun:false,height:'280px'}
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+
+shots = 1024
+
+qc = QuantumCircuit(2, 2)
+
+qc.h([0, 1])
+
+qc.cz(0, 1)
+
+qc.h([0, 1])
+qc.z([0, 1])
+qc.cz(0, 1)
+qc.h([0, 1])
+
+qc.measure([0, 1], [0, 1])
+
+backend = AerSimulator()
+compiled = transpile(qc, backend)
+counts = backend.run(compiled, shots=shots).result().get_counts()
+
+print(qc.draw(output="text"))
+print(counts)
+
+winner = max(counts, key=counts.get)
+print(f"Most frequent state: |{winner}> ({counts[winner]}/{shots})")
+```
+
+<!--
+现场运行代码即可，重点让观众看到 counts 中 |11> 会以最高频率出现。运行后接到下一节：真实规模算法需要更深线路，错误累积会淹没答案，因此需要量子纠错。
+-->
+
+
+
+---
+layout: center
+section: 量子计算前沿的工程化转向
+---
+
+# 量子计算前沿的工程化转向
+
+<!--
+第一部分：说明研究重点为什么从算法演示转向可靠性工程。
 -->
 
 ---
@@ -34,7 +197,12 @@ layout: default
 
 </div>
 
-<img src="./img/image.png" class="max-h-86 max-w-full object-contain rounded shadow" />
+<div class="text-center">
+<img src="./img/image.png" class="max-h-78 max-w-full object-contain rounded shadow" />
+<div class="mt-3 text-xs text-left leading-4 opacity-65">
+Roadmap for building a useful error-corrected quantum computer with key milestones. We are currently building one logical qubit that we will scale in the future.
+</div>
+</div>
 </div>
 
 <!--
@@ -66,6 +234,19 @@ Shor 算法、Grover 算法等基础算法已经说明，量子计算在理论�
 
 <!--
 这一页强调：算法优势已经存在，真正的限制来自硬件错误率和长线路中的错误累积。
+-->
+
+---
+layout: center
+section: 逻辑量子比特与表面码机制
+---
+
+# 逻辑量子比特与表面码机制
+
+## 物理比特编码、错误症状测量与码距扩展
+
+<!--
+第二部分：说明量子纠错如何从物理量子比特构造逻辑量子比特。
 -->
 
 ---
@@ -179,6 +360,19 @@ layout: default
 -->
 
 ---
+layout: center
+section: Willow 表面码实验
+---
+
+# Willow 表面码实验的工程意义
+
+## 低于阈值行为、逻辑错误率缩放与实时解码
+
+<!--
+第三部分：进入 Willow 代表性实验和工程结果。
+-->
+
+---
 layout: default
 ---
 
@@ -230,6 +424,19 @@ layout: default
 -->
 
 ---
+layout: center
+section: 量子计算的发展挑战
+---
+
+# 量子计算的发展挑战
+
+## 跨平台逻辑比特、纠错开销与系统扩展
+
+<!--
+第四部分：从单一实验结果扩展到平台趋势、剩余挑战和总结。
+-->
+
+---
 layout: default
 ---
 
@@ -275,7 +482,7 @@ Willow 的结果并不意味着实用量子计算已经完成。首先，目前�
 
 </div>
 
-<img src="./img/image%20copy%209.png" class="max-h-82 max-w-full object-contain rounded shadow" />
+<img src="./img/image%20copy%209.png" class="max-h-82 max-w-full object-contain rounded shadow ml-20 mt-10" />
 </div>
 
 <!--
